@@ -5,6 +5,7 @@ using UnityEngine;
 public class ActedObject : MonoBehaviour
 {
 	public string TypeOfObject;
+	public GameObject Box;
 	private Animator anim;
 
 	void Start(){
@@ -17,6 +18,9 @@ public class ActedObject : MonoBehaviour
 		if(TypeOfObject == "door"){
 			//Debug.Log("Placed");
 			anim.SetBool("Door", true);
+		}
+		if(TypeOfObject == "spawner"){
+			Instantiate(Box, transform.position + new Vector3(0f, -5f, 0f), Quaternion.identity);
 		}
 		if(TypeOfObject == "debug"){
 			Debug.Log("Placed");
