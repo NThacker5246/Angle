@@ -50,16 +50,15 @@ public class PlayerContr : MonoBehaviour
 	}
 
 	private void Update(){
-		Vector3 ro = new Vector3(0f, 0f, rotationZ);
 		Vector3 down = new Vector3(0f, -1f*G, 0f);
-		down = Quaternion.Euler(ro) * down;
+		down = Quaternion.Euler(new Vector3(0f, 0f, rotationZ)) * down;
 		if(down != Vector3.zero){
 			rb.AddForce(down);
 		}
 		
 		if(Input.GetKeyDown(KeyCode.Space) && isGrounded){
 			Vector3 up = new Vector3(0f, 2 * kJ *G, 0f);
-			up = Quaternion.Euler(ro) * up;
+			up = Quaternion.Euler(new Vector3(0f, 0f, rotationZ)) * up;
 			rb.AddForce(up);
 		}
 
