@@ -9,7 +9,7 @@ public class MrBeast : MonoBehaviour
 	public float speed;
 	public float stopDist;
 	public float retreatDist;
-	public float hp;
+	public float hp = 200;
 	public GameObject TNT;
 	public Vector3 sm;
 	public float timeToDrop;
@@ -49,6 +49,10 @@ public class MrBeast : MonoBehaviour
 			}
 		} else {
 			anim.SetBool("IsRun", false);
+		}
+
+		if(hp <= 0){
+			Destroy(gameObject);
 		}
 	}
 

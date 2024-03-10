@@ -16,6 +16,7 @@ ScriptsOnlyBuild:
     - Pickup
     - PlayerContr
     - PlayerHP
+    - PlayerHit
     - Saver
     - Slime
     - TNT
@@ -111,17 +112,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1558}
     - Class: 114
-      Script: {instanceID: 2548}
+      Script: {instanceID: 2562}
     - Class: 114
-      Script: {instanceID: 2748}
+      Script: {instanceID: 2762}
     - Class: 114
-      Script: {instanceID: 3026}
+      Script: {instanceID: 3042}
     - Class: 114
-      Script: {instanceID: 5468}
+      Script: {instanceID: 5508}
     - Class: 114
-      Script: {instanceID: 5926}
+      Script: {instanceID: 5980}
     - Class: 114
-      Script: {instanceID: 612440}
+      Script: {instanceID: 7688}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -188,53 +189,55 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1862}
     - Class: 114
-      Script: {instanceID: 2274}
+      Script: {instanceID: 2284}
     - Class: 114
-      Script: {instanceID: 2304}
+      Script: {instanceID: 2314}
     - Class: 114
-      Script: {instanceID: 2548}
+      Script: {instanceID: 2562}
     - Class: 114
-      Script: {instanceID: 2662}
+      Script: {instanceID: 2676}
     - Class: 114
-      Script: {instanceID: 2748}
+      Script: {instanceID: 2762}
     - Class: 114
-      Script: {instanceID: 3026}
+      Script: {instanceID: 3042}
     - Class: 114
-      Script: {instanceID: 3110}
+      Script: {instanceID: 3126}
     - Class: 114
-      Script: {instanceID: 3348}
+      Script: {instanceID: 3368}
     - Class: 114
-      Script: {instanceID: 3902}
+      Script: {instanceID: 3924}
     - Class: 114
-      Script: {instanceID: 4110}
+      Script: {instanceID: 4132}
     - Class: 114
-      Script: {instanceID: 4588}
+      Script: {instanceID: 4622}
     - Class: 114
-      Script: {instanceID: 4846}
+      Script: {instanceID: 4882}
     - Class: 114
-      Script: {instanceID: 4862}
+      Script: {instanceID: 4898}
     - Class: 114
-      Script: {instanceID: 4984}
+      Script: {instanceID: 5022}
     - Class: 114
-      Script: {instanceID: 5176}
+      Script: {instanceID: 5214}
     - Class: 114
-      Script: {instanceID: 5468}
+      Script: {instanceID: 5508}
     - Class: 114
-      Script: {instanceID: 5770}
+      Script: {instanceID: 5822}
     - Class: 114
-      Script: {instanceID: 5806}
+      Script: {instanceID: 5858}
     - Class: 114
-      Script: {instanceID: 5926}
+      Script: {instanceID: 5980}
     - Class: 114
-      Script: {instanceID: 7472}
+      Script: {instanceID: 6590}
     - Class: 114
-      Script: {instanceID: 526786}
+      Script: {instanceID: 6724}
     - Class: 114
-      Script: {instanceID: 612440}
+      Script: {instanceID: 6830}
     - Class: 114
-      Script: {instanceID: 741846}
+      Script: {instanceID: 7546}
     - Class: 114
-      Script: {instanceID: 784990}
+      Script: {instanceID: 7688}
+    - Class: 114
+      Script: {instanceID: 37186}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1008,6 +1011,12 @@ ScriptsOnlyBuild:
     className: AudioPlayableAsset
   - hash:
       serializedVersion: 2
+      Hash: 65b3a3b9a7779d539ec75a3ceddebdba
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Pause
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
@@ -1038,6 +1047,12 @@ ScriptsOnlyBuild:
     className: UnityOnSubmitMessageListener
   - hash:
       serializedVersion: 2
+      Hash: f4a5643bcfb49c76d63c2c28049550e5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Zone
+  - hash:
+      serializedVersion: 2
       Hash: a81d4c2c1cf3ad164d277d927a193679
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -1048,6 +1063,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 4901c9ceedb27a28f4a41bc7723266ff
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Saver
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1134,36 +1155,78 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Unity.VisualScripting.Core.dll
-    namespaceName: Unity.VisualScripting
-    className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: 65b3a3b9a7779d539ec75a3ceddebdba
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Pause
-  - hash:
-      serializedVersion: 2
       Hash: 5813a57f2e5147dff53e0b1a444d5f8b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Fade
   - hash:
       serializedVersion: 2
-      Hash: 4901c9ceedb27a28f4a41bc7723266ff
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Saver
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Unity.VisualScripting.Core.dll
+    namespaceName: Unity.VisualScripting
+    className: UnityOnSliderValueChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: f4a5643bcfb49c76d63c2c28049550e5
+      Hash: 756a788acfcd0e6374fea6155c81570d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: Zone
+    className: PlayerHit
+  - hash:
+      serializedVersion: 2
+      Hash: e9389e944eb81a3a9df56fcdb09ce6a9
+    assemblyName: Unity.ProBuilder.dll
+    namespaceName: UnityEngine.ProBuilder
+    className: ColliderBehaviour
+  - hash:
+      serializedVersion: 2
+      Hash: 9c7c87712e298256d276eb96e02a57b1
+    assemblyName: Unity.ProBuilder.dll
+    namespaceName: UnityEngine.ProBuilder
+    className: PreferenceDictionary
+  - hash:
+      serializedVersion: 2
+      Hash: c8783a6dcf5932c980693a657471cb72
+    assemblyName: Unity.ProBuilder.dll
+    namespaceName: UnityEngine.ProBuilder.Shapes
+    className: ProBuilderShape
+  - hash:
+      serializedVersion: 2
+      Hash: d6a8e9bec3160a152b9b2710593d3caa
+    assemblyName: Unity.ProBuilder.dll
+    namespaceName: UnityEngine.ProBuilder
+    className: ColorPalette
+  - hash:
+      serializedVersion: 2
+      Hash: 301f4da7cc3b301c161d089f9d22efed
+    assemblyName: Unity.ProBuilder.dll
+    namespaceName: UnityEngine.ProBuilder
+    className: Entity
+  - hash:
+      serializedVersion: 2
+      Hash: f6633ace6e530c0000f2ac6da4269c52
+    assemblyName: Unity.ProBuilder.dll
+    namespaceName: UnityEngine.ProBuilder
+    className: PolyShape
+  - hash:
+      serializedVersion: 2
+      Hash: 32f6d1d5a09e5c94c633a32edd3e6836
+    assemblyName: Unity.ProBuilder.dll
+    namespaceName: UnityEngine.ProBuilder
+    className: BezierShape
+  - hash:
+      serializedVersion: 2
+      Hash: f8f7dc6c82dff1d866dc294799714ddd
+    assemblyName: Unity.ProBuilder.dll
+    namespaceName: UnityEngine.ProBuilder
+    className: ProBuilderMesh
+  - hash:
+      serializedVersion: 2
+      Hash: e9389e944eb81a3a9df56fcdb09ce6a9
+    assemblyName: Unity.ProBuilder.dll
+    namespaceName: UnityEngine.ProBuilder
+    className: TriggerBehaviour
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/SampleScene.unity
-  playerPath: "C:/Users/nicol/Desktop/Build1006a/\u041F\u043E\u0434\u0423\u0433\u043B\u043E\u043C.exe"
+  playerPath: "C:/Users/nicol/Desktop/Build1007a/\u041F\u043E\u0434\u0423\u0433\u043B\u043E\u043C.exe"
