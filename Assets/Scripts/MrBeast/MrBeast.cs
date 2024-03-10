@@ -10,6 +10,9 @@ public class MrBeast : MonoBehaviour
 	public float stopDist;
 	public float retreatDist;
 	public float hp;
+	public GameObject TNT;
+	public Vector3 sm;
+	public float timeToDrop;
 
 	[HeaderAttribute ("Behaviour")]
 	public bool isAttack;
@@ -21,11 +24,13 @@ public class MrBeast : MonoBehaviour
 
 	private void Start(){
 		anim = GetComponent<Animator>();
+		StartCoroutine("TNTDrop");
 	}
 
 	public void MoveToPlayer(){
 		float dist = Vector3.Distance(transform.position, player.position);
-		Debug.Log(dist);
+		transform.eulerAngles = new Vector3(0f, player.eulerAngles.y-180f, 0f);
+		//Debug.Log(dist);
 		if(dist > stopDist){
 			transform.position = Vector3.MoveTowards(transform.position, player.position, speed*Time.deltaTime);
 		} else if(dist < stopDist && dist > retreatDist){
@@ -53,5 +58,12 @@ public class MrBeast : MonoBehaviour
 
 	private void OnTriggerExit(Collider other){
 		inColl = false;
+	}
+
+	IEnumerator TNTDrop(){
+		while(true){
+			Instantiate(TNT, transform.position + new Vector3(Random.Range(0, sm.x), Random.Range(0, sm.y), Random.Range(0, sm.z)), Quaternion.identity);
+			yield return new WaitForSeconds(timeToDrop);
+		}
 	}
 }
