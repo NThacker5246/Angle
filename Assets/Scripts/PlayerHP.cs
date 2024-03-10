@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour
 {
 	public float HP;
 	public float Stamina;
 	public GameManager gm;
+	public Slider Bar;
+	public Pause stopper;
 
 	public void Damage(float hp){
 		HP -= hp;
@@ -18,10 +21,17 @@ public class PlayerHP : MonoBehaviour
 
 	private void Update(){
 		if(HP < 20){
-			Heal(Stamina);
+			Heal(Stamina*Time.deltaTime);
 		}
 		if(HP <= 0f){
 			gm.RestartGame();
+		}
+		if((int) Bar.value != (int) HP){
+			Bar.value = (int) HP;
+		}
+		
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			stopper.Stop();
 		}
 	}
 }

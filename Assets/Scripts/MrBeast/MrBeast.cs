@@ -15,7 +15,7 @@ public class MrBeast : MonoBehaviour
 	public float timeToDrop;
 
 	[HeaderAttribute ("Behaviour")]
-	public bool isAttack;
+	public bool isAttack = false;
 	public bool inColl;
 
 	[HeaderAttribute ("Components")]

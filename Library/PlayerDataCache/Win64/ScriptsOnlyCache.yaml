@@ -6,17 +6,21 @@ ScriptsOnlyBuild:
     - Button
     - ClicableButton
     - FPS
+    - Fade
     - Feett
     - GameManager
     - MSCamera
     - MrBeast
     - MusicMan
+    - Pause
     - Pickup
     - PlayerContr
     - PlayerHP
+    - Saver
     - Slime
     - TNT
     - Teleport
+    - Zone
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.Graphs.dll:
@@ -34,17 +38,104 @@ ScriptsOnlyBuild:
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.Image
+    - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
   serializedClasses:
     UnityEngine.CoreModule:
+    - UnityEngine.Events.ArgumentCache
     - UnityEngine.Events.PersistentCallGroup
+    - UnityEngine.Events.PersistentListenerMode
     UnityEngine.UI:
+    - UnityEngine.UI.AnimationTriggers
+    - UnityEngine.UI.Button/ButtonClickedEvent
+    - UnityEngine.UI.ColorBlock
     - UnityEngine.UI.FontData
     - UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
-  methodsToPreserve: []
+    - UnityEngine.UI.Navigation
+    - UnityEngine.UI.Slider/SliderEvent
+    - UnityEngine.UI.SpriteState
+  methodsToPreserve:
+  - assembly: Assembly-CSharp
+    fullTypeName: Fade
+    methodName: FadeToLevel
+  - assembly: Assembly-CSharp
+    fullTypeName: Pause
+    methodName: Run
+  - assembly: Assembly-CSharp
+    fullTypeName: PlayerContr
+    methodName: UpdateCursor
+  - assembly: Assembly-CSharp
+    fullTypeName: Pause
+    methodName: Run
+  - assembly: Assembly-CSharp
+    fullTypeName: PlayerContr
+    methodName: SavePos
+  - assembly: Assembly-CSharp
+    fullTypeName: Fade
+    methodName: FadeToLevel
+  - assembly: Assembly-CSharp
+    fullTypeName: Pause
+    methodName: Run
   sceneClasses:
+    Assets/Scenes/Menu.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 1558}
+    - Class: 114
+      Script: {instanceID: 2548}
+    - Class: 114
+      Script: {instanceID: 2748}
+    - Class: 114
+      Script: {instanceID: 3026}
+    - Class: 114
+      Script: {instanceID: 5468}
+    - Class: 114
+      Script: {instanceID: 5926}
+    - Class: 114
+      Script: {instanceID: 612440}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
     Assets/Scenes/SampleScene.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -89,47 +180,61 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1762}
+      Script: {instanceID: 1558}
     - Class: 114
-      Script: {instanceID: 1840}
+      Script: {instanceID: 1764}
     - Class: 114
-      Script: {instanceID: 1860}
+      Script: {instanceID: 1842}
     - Class: 114
-      Script: {instanceID: 2272}
+      Script: {instanceID: 1862}
     - Class: 114
-      Script: {instanceID: 2302}
+      Script: {instanceID: 2274}
     - Class: 114
-      Script: {instanceID: 2546}
+      Script: {instanceID: 2304}
     - Class: 114
-      Script: {instanceID: 2660}
+      Script: {instanceID: 2548}
     - Class: 114
-      Script: {instanceID: 2746}
+      Script: {instanceID: 2662}
     - Class: 114
-      Script: {instanceID: 3108}
+      Script: {instanceID: 2748}
     - Class: 114
-      Script: {instanceID: 3346}
+      Script: {instanceID: 3026}
     - Class: 114
-      Script: {instanceID: 3900}
+      Script: {instanceID: 3110}
     - Class: 114
-      Script: {instanceID: 4108}
+      Script: {instanceID: 3348}
     - Class: 114
-      Script: {instanceID: 4586}
+      Script: {instanceID: 3902}
     - Class: 114
-      Script: {instanceID: 4844}
+      Script: {instanceID: 4110}
     - Class: 114
-      Script: {instanceID: 5172}
+      Script: {instanceID: 4588}
     - Class: 114
-      Script: {instanceID: 5464}
+      Script: {instanceID: 4846}
     - Class: 114
-      Script: {instanceID: 5766}
+      Script: {instanceID: 4862}
     - Class: 114
-      Script: {instanceID: 5802}
+      Script: {instanceID: 4984}
     - Class: 114
-      Script: {instanceID: 5922}
+      Script: {instanceID: 5176}
     - Class: 114
-      Script: {instanceID: 7468}
+      Script: {instanceID: 5468}
     - Class: 114
-      Script: {instanceID: 79770}
+      Script: {instanceID: 5770}
+    - Class: 114
+      Script: {instanceID: 5806}
+    - Class: 114
+      Script: {instanceID: 5926}
+    - Class: 114
+      Script: {instanceID: 7472}
+    - Class: 114
+      Script: {instanceID: 526786}
+    - Class: 114
+      Script: {instanceID: 612440}
+    - Class: 114
+      Script: {instanceID: 741846}
+    - Class: 114
+      Script: {instanceID: 784990}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -141,6 +246,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
       Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
@@ -217,7 +324,7 @@ ScriptsOnlyBuild:
     className: Button
   - hash:
       serializedVersion: 2
-      Hash: ddce5480d56d641b8a6dbfe9dfa6cef2
+      Hash: e0273839f6afcdcece6d944c861d9e5a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerHP
@@ -625,7 +732,7 @@ ScriptsOnlyBuild:
     className: UnityOnPointerClickMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 8c959fa53a0b8bc7f60581f12f286160
+      Hash: fa4914f2be4abe24099550c79f3082d2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerContr
@@ -719,6 +826,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_FontAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 1ce9cbae7813a2aac8c26e12b77151e1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TNT
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1027,11 +1140,30 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 1ce9cbae7813a2aac8c26e12b77151e1
+      Hash: 65b3a3b9a7779d539ec75a3ceddebdba
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: TNT
+    className: Pause
+  - hash:
+      serializedVersion: 2
+      Hash: 5813a57f2e5147dff53e0b1a444d5f8b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Fade
+  - hash:
+      serializedVersion: 2
+      Hash: 4901c9ceedb27a28f4a41bc7723266ff
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Saver
+  - hash:
+      serializedVersion: 2
+      Hash: f4a5643bcfb49c76d63c2c28049550e5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Zone
   platform: 19
   scenePathNames:
+  - Assets/Scenes/Menu.unity
   - Assets/Scenes/SampleScene.unity
-  playerPath: "C:/Users/nicol/Desktop/Build1005a/\u041F\u043E\u0434\u0423\u0433\u043B\u043E\u043C.exe"
+  playerPath: "C:/Users/nicol/Desktop/Build1006a/\u041F\u043E\u0434\u0423\u0433\u043B\u043E\u043C.exe"

@@ -12,6 +12,7 @@ public class PlayerContr : MonoBehaviour
 	public float kJ;
 	public bool isGrounded;
 	private Rigidbody rb;
+	public Saver save;
 
 	public void UpdateCursor()
 	{
@@ -25,8 +26,13 @@ public class PlayerContr : MonoBehaviour
 		flag = !flag;
 	}
 
+	public void SavePos(){
+		save.playerPos = transform.position;
+	}
+
 	private void Start(){
 		rb = GetComponent<Rigidbody>();
+		transform.position = save.playerPos;
 	}
 	
 	private void FixedUpdate(){
