@@ -18,15 +18,17 @@ public class MrBeast : MonoBehaviour
 	[HeaderAttribute ("Behaviour")]
 	public bool isAttack = false;
 	public bool inColl;
+	public bool isFirst;
 
 	[HeaderAttribute ("Components")]
 	private Animator anim;
 	public PlayerHP HP;
 	public Slider BossHP;
+	public Fade TheEnd;
+	public MusicMan sfx;
 
 	private void Start(){
 		anim = GetComponent<Animator>();
-		StartCoroutine("TNTDrop");
 	}
 
 	public void MoveToPlayer(){
@@ -49,11 +51,18 @@ public class MrBeast : MonoBehaviour
 			if(inColl){
 				HP.Damage(0.01f);
 			}
+			if(!isFirst){
+				sfx.StopAllMusic();
+				sfx.Replace();
+				StartCoroutine("TNTDrop");
+				isFirst = true;
+			}
 		} else {
 			anim.SetBool("IsRun", false);
 		}
 
 		if(hp <= 0){
+			TheEnd.FadeToLevel();
 			Destroy(gameObject);
 		}
 

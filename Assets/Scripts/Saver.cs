@@ -6,4 +6,5 @@ using UnityEngine;
 public class Saver : ScriptableObject
 {
 	public Vector3 playerPos;
+	public float Volume;
 }

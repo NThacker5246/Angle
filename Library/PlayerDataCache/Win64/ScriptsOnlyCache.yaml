@@ -5,6 +5,8 @@ ScriptsOnlyBuild:
     - Box
     - Button
     - ClicableButton
+    - DialogueManager
+    - DialogueTrigger
     - FPS
     - Fade
     - Feett
@@ -21,14 +23,15 @@ ScriptsOnlyBuild:
     - Slime
     - TNT
     - Teleport
-    - Zone
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -44,6 +47,8 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
   serializedClasses:
+    Assembly-CSharp:
+    - Dialogue
     UnityEngine.CoreModule:
     - UnityEngine.Events.ArgumentCache
     - UnityEngine.Events.PersistentCallGroup
@@ -62,6 +67,21 @@ ScriptsOnlyBuild:
     fullTypeName: Fade
     methodName: FadeToLevel
   - assembly: Assembly-CSharp
+    fullTypeName: MusicMan
+    methodName: EditVoulme
+  - assembly: Assembly-CSharp
+    fullTypeName: DialogueManager
+    methodName: DisplayNextSentence
+  - assembly: Assembly-CSharp
+    fullTypeName: Pause
+    methodName: Run
+  - assembly: Assembly-CSharp
+    fullTypeName: PlayerContr
+    methodName: SavePos
+  - assembly: Assembly-CSharp
+    fullTypeName: Pause
+    methodName: ExitFromSettings
+  - assembly: Assembly-CSharp
     fullTypeName: Pause
     methodName: Run
   - assembly: Assembly-CSharp
@@ -79,6 +99,9 @@ ScriptsOnlyBuild:
   - assembly: Assembly-CSharp
     fullTypeName: Pause
     methodName: Run
+  - assembly: Assembly-CSharp
+    fullTypeName: Pause
+    methodName: GoToSettings
   sceneClasses:
     Assets/Scenes/Menu.unity:
     - Class: 1
@@ -97,7 +120,9 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
-    - Class: 89
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -115,6 +140,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 2904}
     - Class: 114
       Script: {instanceID: 3216}
+    - Class: 114
+      Script: {instanceID: 4186}
     - Class: 114
       Script: {instanceID: 5952}
     - Class: 114
@@ -167,8 +194,6 @@ ScriptsOnlyBuild:
     - Class: 82
       Script: {instanceID: 0}
     - Class: 83
-      Script: {instanceID: 0}
-    - Class: 89
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -229,13 +254,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 7190}
     - Class: 114
-      Script: {instanceID: 7334}
-    - Class: 114
       Script: {instanceID: 7464}
     - Class: 114
       Script: {instanceID: 8288}
     - Class: 114
       Script: {instanceID: 8438}
+    - Class: 114
+      Script: {instanceID: 52444}
+    - Class: 114
+      Script: {instanceID: 52448}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -249,6 +276,57 @@ ScriptsOnlyBuild:
     - Class: 196
       Script: {instanceID: 0}
     - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Scenes/TheEnd.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 1604}
+    - Class: 114
+      Script: {instanceID: 2686}
+    - Class: 114
+      Script: {instanceID: 2904}
+    - Class: 114
+      Script: {instanceID: 5622}
+    - Class: 114
+      Script: {instanceID: 5952}
+    - Class: 114
+      Script: {instanceID: 6484}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
       Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
@@ -307,7 +385,7 @@ ScriptsOnlyBuild:
     className: UnityOnCollisionStayMessageListener
   - hash:
       serializedVersion: 2
-      Hash: a7f7e7ef06efb4391197718c3db5da9e
+      Hash: 355702e08c1c03419f27fe665d2bf0ca
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MrBeast
@@ -319,7 +397,7 @@ ScriptsOnlyBuild:
     className: UnityOnMouseExitMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 0e57264c003590db1d8d69eb6b2735b4
+      Hash: fba6ee1349f769261024ecc1cf559b89
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Button
@@ -535,7 +613,7 @@ ScriptsOnlyBuild:
     className: UnityOnMouseDownMessageListener
   - hash:
       serializedVersion: 2
-      Hash: d156760f9dc2bb2a2c7e2baa329d57c6
+      Hash: 78bef77fb211be64318486f061c42207
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ClicableButton
@@ -679,7 +757,7 @@ ScriptsOnlyBuild:
     className: SignalReceiver
   - hash:
       serializedVersion: 2
-      Hash: 9816c04c45be0ed4d3d60a1b0bcf51d3
+      Hash: 565196919ab45d56eec93b310a6e34ef
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MusicMan
@@ -1069,7 +1147,7 @@ ScriptsOnlyBuild:
     className: AudioPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: f2030b1d8e913cbe73a4b6b0bd240bec
+      Hash: 3b183390d4da6c248f4d7c7ff6bfc6de
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Pause
@@ -1123,7 +1201,7 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: 4901c9ceedb27a28f4a41bc7723266ff
+      Hash: db62c86d46c983987d509504c0a561c7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Saver
@@ -1223,8 +1301,27 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 6df3dba1fa02b40bc9a30bb2d218ab08
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DialogueManager
+  - hash:
+      serializedVersion: 2
+      Hash: 5600f0de9562188a498a8909dee800ed
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DialogueAnimator
+  - hash:
+      serializedVersion: 2
+      Hash: 506d3d72937d3305a32c28216c5d9d51
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DialogueTrigger
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/SampleScene.unity
-  playerPath: "C:/Users/nicol/Desktop/Build1007b/\u041F\u043E\u0434\u0423\u0433\u043B\u043E\u043C.exe"
+  - Assets/Scenes/TheEnd.unity
+  playerPath: "C:/Users/nicol/Desktop/Build1009a/\u041F\u043E\u0434\u0423\u0433\u043B\u043E\u043C.exe"

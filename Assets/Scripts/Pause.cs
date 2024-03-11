@@ -7,6 +7,8 @@ public class Pause : MonoBehaviour
 	//public Animator anim;
 	public Transform player;
 	public bool isInMenu;
+	public GameObject setting;
+	//public Saves save;
 	//public int Dementions;
 	//public Storage st;
 	/*
@@ -29,5 +31,13 @@ public class Pause : MonoBehaviour
 		Time.timeScale = 1;
 		isInMenu = false;
 		gameObject.SetActive(false);
+	}
+
+	public void GoToSettings(){
+		setting.SetActive(true);
+	}
+
+	public void ExitFromSettings(){
+		setting.SetActive(false);
 	}
 }
