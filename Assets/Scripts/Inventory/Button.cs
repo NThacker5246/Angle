@@ -5,20 +5,24 @@ using UnityEngine;
 public class Button : MonoBehaviour
 {
 	public ActedObject ActionObject;
+	public Animator anim;
 
 	private void OnTriggerEnter(Collider other){
 		if(other.tag == "Box"){
 			ActionObject.Do();
+			anim.SetBool("Click", true);
 		}
 		
 		if(other.tag == "PickedBox") {
 			ActionObject.StopDoing();
+			anim.SetBool("Click", false);
 		}
 	}
 
 	private void OnTriggerExit(Collider other){
 		if(other.tag == "Box"){
 			ActionObject.StopDoing();
+			anim.SetBool("Click", false);
 		}
 	}
 }

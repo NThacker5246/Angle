@@ -52,6 +52,7 @@ public class PlayerContr : MonoBehaviour
 		transform.eulerAngles = new Vector3(0f, rotationY, rotationZ);
 		//movement = Quaternion.Euler(new Vector3(rotationY*Mathf.Sin(rotationZ), rotationY* Mathf.Cos(rotationZ), rotationZ)) * movement;
 		movement = Quaternion.Euler(new Vector3(0f, rotationY, rotationZ)) * movement;
+		Debug.Log(movement);
 		rb.AddForce(movement);
 	}
 

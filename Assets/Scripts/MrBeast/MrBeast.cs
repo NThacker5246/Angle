@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MrBeast : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class MrBeast : MonoBehaviour
 	[HeaderAttribute ("Components")]
 	private Animator anim;
 	public PlayerHP HP;
+	public Slider BossHP;
 
 	private void Start(){
 		anim = GetComponent<Animator>();
@@ -53,6 +55,10 @@ public class MrBeast : MonoBehaviour
 
 		if(hp <= 0){
 			Destroy(gameObject);
+		}
+
+		if(BossHP.value != (int) hp){
+			BossHP.value = hp;
 		}
 	}
 
