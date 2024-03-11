@@ -8,9 +8,10 @@ public class PlayerHit : MonoBehaviour
 	public MrBeast beast;
 	public bool inAttColl;
 	public GameObject Weapon1;
+	public Pause pause;
 
 	void Update(){
-		if(Input.GetMouseButtonDown(0)){
+		if(Input.GetMouseButtonDown(0) && !pause.isInMenu){
 			Weapon1.SetActive(true);
 			Debug.Log("Click");
 			// Destroy the gameObject after clicking on it

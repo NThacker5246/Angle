@@ -20780,6 +20780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 590082121}
+  isInMenu: 0
 --- !u!114 &308555871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37000,6 +37001,7 @@ MonoBehaviour:
   beast: {fileID: 739584797}
   inAttColl: 0
   Weapon1: {fileID: 1802453807}
+  pause: {fileID: 308555870}
 --- !u!1 &593064156
 GameObject:
   m_ObjectHideFlags: 0
@@ -54075,7 +54077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &846193165
 Animator:
   serializedVersion: 5
@@ -134927,15 +134929,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5547243880995144293, guid: 6febd001d5181da47bf406ce35608730, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.84
+      value: -2.03
       objectReference: {fileID: 0}
     - target: {fileID: 5547243880995144293, guid: 6febd001d5181da47bf406ce35608730, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.02
+      value: -3.84
       objectReference: {fileID: 0}
     - target: {fileID: 5547243880995144293, guid: 6febd001d5181da47bf406ce35608730, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.26853082
+      value: 15.11
       objectReference: {fileID: 0}
     - target: {fileID: 5547243880995144293, guid: 6febd001d5181da47bf406ce35608730, type: 3}
       propertyPath: m_LocalRotation.w

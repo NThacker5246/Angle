@@ -6,6 +6,7 @@ public class Pause : MonoBehaviour
 {
 	//public Animator anim;
 	public Transform player;
+	public bool isInMenu;
 	//public int Dementions;
 	//public Storage st;
 	/*
@@ -19,12 +20,14 @@ public class Pause : MonoBehaviour
 	*/
 
 	public void Stop(){
+		isInMenu =  true;
 		gameObject.SetActive(true);
 		Time.timeScale = 0;
 	}
 
 	public void Run(){
 		Time.timeScale = 1;
+		isInMenu = false;
 		gameObject.SetActive(false);
 	}
 }
