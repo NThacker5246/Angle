@@ -24,7 +24,7 @@ public class MusicMan : MonoBehaviour
 				gm.SetActive(false);
 				gm.SetActive(true);
 			}	
-			//Debug.Log(sfx.time);
+			Debug.Log(sfx.time);
 		}
 	}
 
