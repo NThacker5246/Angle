@@ -13,7 +13,7 @@ public class PlayerContr : MonoBehaviour
 	public bool isGrounded;
 	private Rigidbody rb;
 	public Saver save;
-
+	public Vector3 vc;
 	public void UpdateCursor()
 	{
 		if(flag == true){
@@ -30,30 +30,104 @@ public class PlayerContr : MonoBehaviour
 		save.playerPos = transform.position;
 	}
 
+	public float sin(float a){
+		float n = a % 180; 
+		double rad = (n * 3.1415926535897932384626433832795d)/180;
+		double sin = rad - ((rad*rad*rad)/6) + ((rad*rad*rad*rad*rad)/120) - ((rad*rad*rad*rad*rad*rad*rad)/5040) + ((rad*rad*rad*rad*rad*rad*rad*rad*rad)/362880);
+		if((a % 360) > 180){
+			sin = sin * -1;
+		}
+		return (float) sin;
+	}
+	/*
+	public float cos(int a){
+		int n = a % 181;
+		double rad = (n * 3.1415926535897932384626433832795d)/180;
+		double cos = 1 - (rad*rad)/2 + ((rad*rad*rad*rad)/24) - ((rad*rad*rad*rad*rad*rad)/720) + ((rad*rad*rad*rad*rad*rad*rad*rad)/40320) - ((rad*rad*rad*rad*rad*rad*rad*rad*rad*rad)/3628800);
+		if((a % 180) > 90){
+			//cos = cos * -1;
+		}
+		return (float) cos;
+	}
+	*/
+
+	public float cos(float a){
+		float n = a % 90;
+		float cos2 = 1 - Mathf.Pow(sin(n), 2);
+		float cos = Mathf.Pow(cos2, 0.5f);
+		if((a % 181) > 90){
+			//Debug.Log(cos);
+			cos = cos * -1;
+			//Debug.Log(cos);
+
+		}
+		return cos;
+	}
+
 	private void Start(){
 		rb = GetComponent<Rigidbody>();
 		transform.position = save.playerPos;
+		Debug.Log(cos(180));
+		Debug.Log(Mathf.Cos(180));
 	}
 	
 	private void FixedUpdate(){
 		if(Input.GetKey(KeyCode.F)){
 			rotationZ += 1f;
+			vc = new Vector3(vc.x, vc.y, rotationZ);
 		}
 		if(Input.GetKey(KeyCode.G)){
 			rotationZ -= 1f;
+			vc = new Vector3(vc.x, vc.y, rotationZ);
 		}
 		float Horizontal = Input.GetAxis("Horizontal")*speed;
 		float Vertical = Input.GetAxis("Vertical")*speed;
 		//Debug.Log(Vertical);
 		Vector3 movement = new Vector3(Horizontal, 0f, Vertical);
-		float mouseX = Input.GetAxis("Mouse X") * 100 * Time.deltaTime;
+		float mouseX = Input.GetAxis("Mouse X") * 300 * Time.deltaTime;
 		rotationY += mouseX;
-		//transform.eulerAngles = new Vector3(rotationY * Mathf.Sin(rotationZ), rotationY * Mathf.Cos(rotationZ), rotationZ);
-		transform.eulerAngles = new Vector3(0f, rotationY, rotationZ);
-		//movement = Quaternion.Euler(new Vector3(rotationY*Mathf.Sin(rotationZ), rotationY* Mathf.Cos(rotationZ), rotationZ)) * movement;
-		movement = Quaternion.Euler(new Vector3(0f, rotationY, rotationZ)) * movement;
+		rotationZ = rotationZ % 360;
+		rotationY = rotationY % 360;
+
+		if(rotationZ > -22 && rotationZ < 22){
+			vc = (new Vector3(0f, rotationY, rotationZ));
+			movement = Quaternion.Euler(new Vector3(0f, rotationY, rotationZ)) * movement;
+		} else if(rotationZ < 45 && rotationZ >= 22){
+			vc = (new Vector3(rotationY*0.5f, rotationY*0.5f, rotationZ));
+			movement = Quaternion.Euler(new Vector3(rotationY*0.5f, rotationY*0.5f, rotationZ)) * movement;
+		} else if(rotationZ < 135 && rotationZ >= 45){
+			vc = (new Vector3(rotationY, rotationY*0, rotationZ));
+			movement = Quaternion.Euler(new Vector3(rotationY, rotationY*0, rotationZ)) * movement;
+		} else if(rotationZ < 157 && rotationZ >= 135){
+			vc = (new Vector3(rotationY*0.5f, rotationY*-0.5f, rotationZ));
+			movement = Quaternion.Euler(new Vector3(rotationY*0.5f, rotationY*-0.5f, rotationZ)) * movement;
+		} else if(rotationZ < -157 || rotationZ >= 157 || rotationZ == 180){
+			vc = (new Vector3(rotationY*0, rotationY*-1f, rotationZ));
+			movement = Quaternion.Euler(new Vector3(rotationY*0, rotationY*-1f, rotationZ)) * movement;
+		} else if(rotationZ < -135 && rotationZ >= -157){
+			vc = (new Vector3(rotationY*-0.5f, rotationY*-0.5f, rotationZ));
+			movement = Quaternion.Euler(new Vector3(rotationY*-0.5f, rotationY*-0.5f, rotationZ)) * movement;
+		} else if(rotationZ < -45 && rotationZ >= -135){
+			vc = (new Vector3(rotationY*-1f, rotationY*0f, rotationZ));
+			movement = Quaternion.Euler(new Vector3(rotationY*-1f, rotationY*0f, rotationZ)) * movement;
+		} else if(rotationZ < -22 && rotationZ >= -45){
+			vc = (new Vector3(rotationY*-0.5f, rotationY*0.5f, rotationZ));
+			movement = Quaternion.Euler(new Vector3(rotationY*-0.5f, rotationY*0.5f, rotationZ)) * movement;
+		} else {
+			return;
+		}
+		//transform.eulerAngles = new Vector3(rotationY * sin(rotationZ), rotationY * cos(rotationZ), rotationZ);
+		//Debug.Log(sin(rotationZ));
+		//Debug.Log(cos(rotationZ));
+		//VMC.eulerAngles += new Vector3(0f, mouseX, 0f);
+		
+		//movement = Quaternion.Euler(new Vector3(rotationY*sin(rotationZ), rotationY*cos(rotationZ), rotationZ)) * movement;
+		
 		//Debug.Log(movement);
-		rb.AddForce(movement);
+		//rb.AddForce(movement);
+		transform.position += movement;
+		//vc = transform.position;
+		//vc = transform.eulerAngles;
 	}
 
 	private void Update(){

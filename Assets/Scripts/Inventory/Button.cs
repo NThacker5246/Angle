@@ -17,6 +17,7 @@ public class Button : MonoBehaviour
 			ActionObject.StopDoing();
 			anim.SetBool("Click", false);
 		}
+		Debug.Log(other.tag);
 	}
 
 	private void OnTriggerExit(Collider other){
