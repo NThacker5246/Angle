@@ -8,7 +8,7 @@ public class PlayerContr : MonoBehaviour
 	public float rotationY;
 	public float rotationZ;
 	public float G;
-	private bool flag;
+	private bool flag = true;
 	public float kJ;
 	public bool isGrounded;
 	private Rigidbody rb;
@@ -84,7 +84,7 @@ public class PlayerContr : MonoBehaviour
 		float Vertical = Input.GetAxis("Vertical")*speed;
 		//Debug.Log(Vertical);
 		Vector3 movement = new Vector3(Horizontal, 0f, Vertical);
-		float mouseX = Input.GetAxis("Mouse X") * 300 * Time.deltaTime;
+		float mouseX = Input.GetAxis("Mouse X") * 150 * Time.deltaTime;
 		rotationY += mouseX;
 		rotationZ = rotationZ % 360;
 		rotationY = rotationY % 360;
