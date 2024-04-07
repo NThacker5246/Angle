@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6351198769892394074}
   - component: {fileID: 6351198769892394077}
   - component: {fileID: 5487658792242853559}
+  - component: {fileID: 7425735983786137206}
   m_Layer: 0
   m_Name: Button (1)
   m_TagString: Untagged
@@ -62,8 +63,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActionObject: {fileID: 0}
+  flyer: {fileID: 0}
   isColl: 0
   anim: {fileID: 5487658792242853559}
+  isFlyer: 0
+  isChecker: 0
+  col: 0
 --- !u!95 &5487658792242853559
 Animator:
   serializedVersion: 5
@@ -85,6 +90,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7425735983786137206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6351198769892394079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8defe2fb8764f34469dd797c20a1657c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groupId: 1
+  mainId: 1
 --- !u!1 &6351198770123839674
 GameObject:
   m_ObjectHideFlags: 0

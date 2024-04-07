@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4515909685375795629}
   - component: {fileID: 7210012897558191015}
   - component: {fileID: 6045927043291586084}
+  - component: {fileID: 4118098305892592189}
   m_Layer: 0
   m_Name: Box2A
   m_TagString: Box
@@ -97,7 +98,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031235742684248972}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 090289f584bf4c34a82c528697d2868b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -147,3 +148,17 @@ MonoBehaviour:
   inCollider: 0
   BoxItem: {fileID: 1559315902064892355, guid: 8e2a764669f18dd4fa939c3e77b1bc46, type: 3}
   player: {fileID: 0}
+--- !u!114 &4118098305892592189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031235742684248972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8defe2fb8764f34469dd797c20a1657c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groupId: 0
+  mainId: 2

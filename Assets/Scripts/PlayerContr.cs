@@ -124,8 +124,8 @@ public class PlayerContr : MonoBehaviour
 		//movement = Quaternion.Euler(new Vector3(rotationY*sin(rotationZ), rotationY*cos(rotationZ), rotationZ)) * movement;
 		
 		//Debug.Log(movement);
-		//rb.AddForce(movement);
-		transform.position += movement;
+		rb.AddForce(movement);
+		//transform.position += movement;
 		//vc = transform.position;
 		//vc = transform.eulerAngles;
 	}
