@@ -17,7 +17,7 @@ public class Controller : MonoBehaviour
 	void Start()
 	{
 		rb = gameObject.GetComponent<Rigidbody>();
-		LockCursor();
+		//LockCursor();
 	}
 
 	// Update is called once per frame
@@ -33,6 +33,9 @@ public class Controller : MonoBehaviour
 		}
 		if (Input.GetKey(KeyCode.LeftShift)) {
 			transform.position += new Vector3(0f, up*-1, 0f);
+		}
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			UpdateCursor();
 		}
 		if(Input.GetKeyDown(KeyCode.I)){
 			UpdateCursor();

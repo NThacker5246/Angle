@@ -17,8 +17,8 @@ public class GameUIComp : MonoBehaviour
 	*/
 
 	public void Start(){
-		for(int i = 0; i < 15; i++){
-			cls[i] = ((int) Mathf.Floor(Random.Range(0, 2)));
+		for(int i = 0; i < 25; i++){
+			cls[i] = ((int) Mathf.Floor(Random.Range(0, 3)));
 		}
 		switch(cls[i]){
 			case 0:

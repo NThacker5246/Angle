@@ -11,7 +11,7 @@ public class DialogueManager : MonoBehaviour
 
 	public Animator boxAnim;
 	//public Animator startAnim;
-
+	public bool end;
 	private Queue<string> sentences;
 
 	private void Start()
@@ -61,6 +61,7 @@ public class DialogueManager : MonoBehaviour
 		boxAnim.SetBool("boxOpen", false);
 		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerContr>().UpdateCursor();
 		StartCoroutine("Game");
+		end = true;
 	}
 
 	IEnumerator Game(){
