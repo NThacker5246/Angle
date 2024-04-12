@@ -26,7 +26,7 @@ public class PlayerHP : MonoBehaviour
 		if(HP <= 0f){
 			gm.RestartGame();
 		}
-		if((int) Bar.value != (int) HP){
+		if(Bar != null && (int) Bar.value != (int) HP){
 			Bar.value = (int) HP;
 		}
 		

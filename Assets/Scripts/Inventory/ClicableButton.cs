@@ -32,10 +32,14 @@ public class ClicableButton : MonoBehaviour
 	}
 
 	private void OnTriggerEnter(Collider other){
-		isColl = true;
+		if(other.tag == "Player"){
+			isColl = true;
+		}
 	}
 
 	private void OnTriggerExit(Collider other){
-		isColl = false;
+		if(other.tag == "Player"){
+			isColl = false;
+		}
 	}
 }

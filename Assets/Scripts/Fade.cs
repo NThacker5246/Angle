@@ -7,6 +7,7 @@ public class Fade : MonoBehaviour
 {
 	[SerializeField] private Animator anim;
 	public int levelToLoad;
+	public Vector3 newPl;
 
 	//public Vector3 position;
 	

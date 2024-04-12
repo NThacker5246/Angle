@@ -6102,7 +6102,7 @@ GameObject:
   - component: {fileID: 1040212671}
   - component: {fileID: 1040212670}
   m_Layer: 5
-  m_Name: InputField (Legacy)
+  m_Name: save
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7012,7 +7012,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: C:\Alogical\Angle\Maps
+  m_Text: Game\Maps
 --- !u!222 &1270044173
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7532,8 +7532,8 @@ MonoBehaviour:
   editor: {fileID: 499921460}
   ways:
   - .\Maps
-  - C:\Users\nicol\Documents\Alogical\Angle\Maps
-  Sname: {fileID: 1319349637}
+  - .\..\Documents\Alogical\Angle\Maps
+  Sname: {fileID: 1040212670}
   Sway: {fileID: 1849784269}
   Lname: {fileID: 1319349637}
   Lway: {fileID: 1816365434}
@@ -11046,6 +11046,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1940728339}
   levelToLoad: 0
+  newPl: {x: 0, y: 0, z: 0}
 --- !u!114 &1940728341
 MonoBehaviour:
   m_ObjectHideFlags: 0

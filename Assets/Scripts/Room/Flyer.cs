@@ -22,6 +22,7 @@ public class Flyer : MonoBehaviour
 	}
 
 	public void Do(){
+		Debug.Log("ЫЕФКЕАЕЫПЫВ");
 		player.G = 0;
 		StartCoroutine("Space");
 	}

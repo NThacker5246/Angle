@@ -57,6 +57,8 @@ public class SaveToFile : MonoBehaviour
 
 		string num = JsonUtility.ToJson(test);
 		Debug.Log(num);
+		Debug.Log(ways[Sway.value] + "\\" + Sname.text);
+		//CreateNewTextFile(num, Sname.text, ways[Sway.value]);
 		CreateNewTextFile(num, Sname.text, ways[Sway.value]);
 	}
 
@@ -93,9 +95,54 @@ public class SaveToFile : MonoBehaviour
 		}
 	}
 
+	public void LoadMapUsage(string name, string way, Text deb){
+		string data1 = ReadNewTextFile(name, way);
+		Save read = JsonUtility.FromJson<Save>(data1);
+		//deb.text += ", file"; 
+		editor.allBlocks = new GameObject[read.data.Length];
+		editor.iOfb = 0;
+		int i=0;
+		foreach(string json in read.data){
+			//deb.text += ""+i;
+			Bk realData = JsonUtility.FromJson<Bk>(json);
+			if(realData.isSet == true){
+				GameObject block = Instantiate(editor.blocks[realData.groupId].blocks[realData.globId], realData.pos, Quaternion.identity);
+				block.transform.eulerAngles = realData.rot;
+				block.transform.localScale = realData.scl;
+				editor.allBlocks[editor.iOfb] = block;
+				editor.iOfb += 1;
+				block.transform.name = "" + (editor.iOfb-1);
+			}
+		}
+		//deb.text += ", blocked";
+		int j = 0;
+		foreach(string json in read.data){
+			Bk realData = JsonUtility.FromJson<Bk>(json);
+			if(realData.linkId != ""){
+				int id = int.Parse(realData.linkId);
+				if(editor.allBlocks[j].GetComponent<Button>() != null){
+					editor.allBlocks[j].GetComponent<Button>().ActionObject = editor.allBlocks[id].GetComponent<ActedObject>();
+				} else if(editor.allBlocks[j].GetComponent<ClicableButton>() != null){
+					editor.allBlocks[j].GetComponent<ClicableButton>().ActionObject = editor.allBlocks[id].GetComponent<ActedObject>();
+				} else if(editor.allBlocks[j].GetComponent<Teleport>() != null){
+					editor.allBlocks[j].GetComponent<Teleport>().SecondTeleport = editor.allBlocks[id].GetComponent<Transform>();
+				}
+			}
+			j += 1;
+		}
+		//deb.text += ", linked";
+	}
+
+	public void OpenTxt(string data, string file, string way)
+    {              
+        var lines = File.ReadAllLines(way + "/" + file);
+        lines[0] = data;
+        File.WriteAllLines(file, lines);
+    }
+
 	public void CreateNewTextFile(string data, string name, string way)
     {
-        using (StreamWriter sw = new StreamWriter(way + "/" + name,true))
+        using (StreamWriter sw = new StreamWriter(way + "/" + name,false))
 	    {
 	        sw.WriteLine(data);
 	    }
