@@ -15,8 +15,25 @@ public class LoadST : MonoBehaviour
         ConfigState config = JsonUtility.FromJson<ConfigState>(file_config);
         string data = ReadNewTextFile(config.currentFile, "./Saves");
         StateOfGame gm = JsonUtility.FromJson<StateOfGame>(data);
-        player.position = gm.player;
-        mapName = gm.nameMap;
+        if(loc == 1 && !config.isReset){
+        	player.position = new Vector3(0,0,0);
+        	config.isReset = true;
+        	Save();
+        	string nc = JsonUtility.ToJson(config);
+        	CreateNewTextFile(nc, "config.json", ".");
+        } else {
+        	player.position = gm.player;
+        	mapName = gm.nameMap;
+		}
+    }
+
+    public void Reset()
+    {
+        StateOfGame gm = new StateOfGame(new Vector3(0,0,0), "", loc);
+        string data = JsonUtility.ToJson(gm);
+        string file_config = ReadNewTextFile("config.json", ".");
+        ConfigState config = JsonUtility.FromJson<ConfigState>(file_config);
+        CreateNewTextFile(data, config.currentFile, "./Saves");
     }
 
     // Update is called once per frame

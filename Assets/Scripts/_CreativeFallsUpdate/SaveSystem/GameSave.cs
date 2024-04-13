@@ -96,8 +96,10 @@ public struct StateOfGame{
 
 public struct ConfigState{
 	public string currentFile;
+	public bool isReset;
 
 	public ConfigState(string name){
+		this.isReset = false;
 		this.currentFile = name;
 	}
 }
