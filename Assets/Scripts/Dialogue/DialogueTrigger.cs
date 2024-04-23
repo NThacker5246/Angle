@@ -12,6 +12,7 @@ public class DialogueTrigger : MonoBehaviour
 	public void TriggerDialogue()
 	{
 		dm.StartDialogue(dialogue[Count]);
+		dm.isSt = true;
 		Count++;
 	}
 

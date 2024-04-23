@@ -22,9 +22,9 @@ public class GameSave : MonoBehaviour
 	public void NewState(){
 		StateOfGame newState0;
 		if(typeofgame.value == 1){
-			newState0 = new StateOfGame(new Vector3(0,1,0), map.text, -1);
+			newState0 = new StateOfGame(new Vector3(0,1,0), map.text, -1, false);
 		} else {
-			newState0 = new StateOfGame(new Vector3(0,1,0), "", 0);
+			newState0 = new StateOfGame(new Vector3(0,1,0), "", 0, false);
 		}
 
 		string json = JsonUtility.ToJson(newState0);
@@ -86,8 +86,10 @@ public struct StateOfGame{
 	public Vector3 player;
 	public string nameMap;
 	public int standartLevel;
+	public bool isReset;
 
-	public StateOfGame(Vector3 pos, string map, int st0){
+	public StateOfGame(Vector3 pos, string map, int st0, bool rst){
+		this.isReset = rst;
 		this.player = pos;
 		this.nameMap = map;
 		this.standartLevel = st0;
@@ -96,10 +98,8 @@ public struct StateOfGame{
 
 public struct ConfigState{
 	public string currentFile;
-	public bool isReset;
 
 	public ConfigState(string name){
-		this.isReset = false;
 		this.currentFile = name;
 	}
 }

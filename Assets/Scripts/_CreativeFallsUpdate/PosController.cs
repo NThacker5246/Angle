@@ -39,6 +39,7 @@ public class PosController : MonoBehaviour
 			SY.text = "" + (int)sel.localScale.y;
 			SZ.text = "" + (int)sel.localScale.z;
 			id.text = sel.name;
+			ReadAct();
 		}
 	}
 	public void Write(){
@@ -76,6 +77,83 @@ public class PosController : MonoBehaviour
 		} catch {
 			return;
 		}
+	}
+
+	public void ReadAct(){
+		try{
+			if(VMc.sel != null){
+				Transform sel = VMc.sel.transform;
+				string s = "";
+				if(sel.GetComponent<Button>() != null){
+					s = sel.GetComponent<Button>().ActionObject.transform.name;
+				} else if(sel.GetComponent<ClicableButton>() != null){
+					s = sel.GetComponent<ClicableButton>().ActionObject.transform.name;
+				} else if(sel.GetComponent<Teleport>()){
+					s = sel.GetComponent<Teleport>().SecondTeleport.name;
+				}
+				idOfAct.text = s;
+			}
+
+		} catch {
+			return;
+		}
+	}
+
+	public void CopyPaste(){
+		try{
+			if(VMc.sel != null && PX.text != ""){
+				Transform sel = VMc.sel.transform;
+				GameObject block = Instantiate(sel.gameObject, sel.position, Quaternion.identity);
+	            VMc.allBlocks[VMc.iOfb] = block;
+	            VMc.iOfb += 1;
+	            block.transform.name = "" + (VMc.iOfb-1);
+
+			}
+		} catch {
+			return;
+		}
+	}
+
+	public void Remove(){
+		/*
+		try{
+			if(VMc.sel != null){
+				Transform sel = VMc.sel.transform;
+				string tempIdStr = sel.name;
+				int tempId = int.Parse(tempIdStr);
+				GameObject[] tempArr = VMc.allBlocks;
+				GameObject[] newArr = new GameObject[tempArr.Length];
+				int i = 0;
+				foreach(GameObject gm in tempArr){
+					if(i < tempId){
+						newArr[i] = gm;
+					} else if(i > tempId){
+						newArr[i-2] = gm;
+					}
+					i += 1;
+					Debug.Log(i/tempArr.Length*100);
+				}
+
+				VMc.allBlocks = newArr;
+				Destroy(sel.gameObject);
+			}
+		} catch {
+			return;
+		}
+		*/
+		try{
+			if(VMc.sel != null){
+				Transform sel = VMc.sel.transform;
+				string tempIdStr = sel.name;
+				int tempId = int.Parse(tempIdStr);
+				VMc.allBlocks[tempId] = null;
+				VMc.DeletingBlocks += 1;
+				Destroy(sel.gameObject);
+			}
+		} catch {
+			return;
+		}
+
 	}
 
 	public void Show(){

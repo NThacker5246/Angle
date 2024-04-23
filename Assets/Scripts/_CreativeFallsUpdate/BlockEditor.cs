@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BlockEditor : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class BlockEditor : MonoBehaviour
     public PosController Inspector;
     public GameObject[] allBlocks;
     public int iOfb;
+    public int DeletingBlocks;
+
+    public Image th;
 
     void Start(){
         dot = gameObject.GetComponent<Camera>();
@@ -31,10 +35,24 @@ public class BlockEditor : MonoBehaviour
         }
         //Debug.DrawLine(ro, rd, Color.red);
         if(Input.GetMouseButtonDown(1)){
-            GameObject block = Instantiate(blocks[HOTGroup].blocks[HOT], transform.position, Quaternion.identity);
-            allBlocks[iOfb] = block;
-            iOfb += 1;
-            block.transform.name = "" + (iOfb-1);
+            if(DeletingBlocks == 0) {
+                GameObject block = Instantiate(blocks[HOTGroup].blocks[HOT], transform.position, Quaternion.identity);
+                allBlocks[iOfb] = block;
+                iOfb += 1;
+                block.transform.name = "" + (iOfb-1);
+            } else {
+                int j = 0;
+                foreach(GameObject gm in allBlocks){
+                    if(gm == null){
+                        GameObject block = Instantiate(blocks[HOTGroup].blocks[HOT], transform.position, Quaternion.identity);
+                        allBlocks[j] = block;
+                        block.transform.name = "" + j;
+                        DeletingBlocks -= 1;
+                        break;
+                    }
+                    j += 1;
+                }
+            }
         }
         CheckHotkeyInput();
     }
@@ -50,10 +68,15 @@ public class BlockEditor : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Q)){
             HOTGroup -= 1;
-            HOTGroup = Mathf.Clamp(HOTGroup, 0, blocks.Length);
+            HOTGroup = Mathf.Clamp(HOTGroup, 0, blocks.Length-1);
         } else if(Input.GetKeyDown(KeyCode.E)){
             HOTGroup += 1;
-            HOTGroup = Mathf.Clamp(HOTGroup, 0, blocks.Length);
+            HOTGroup = Mathf.Clamp(HOTGroup, 0, blocks.Length-1);
+        }
+
+        HOT = Mathf.Clamp(HOT, 0, blocks[HOTGroup].blocks.Length-1);
+        if(th.sprite != blocks[HOTGroup].sp[HOT]){
+            th.sprite = blocks[HOTGroup].sp[HOT];
         }
     }
 

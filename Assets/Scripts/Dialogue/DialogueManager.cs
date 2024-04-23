@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
 	//public Animator startAnim;
 	public bool end;
 	private Queue<string> sentences;
+	public bool isSt;
 
 	private void Start()
 	{
@@ -32,6 +33,12 @@ public class DialogueManager : MonoBehaviour
 			sentences.Enqueue(sentence);
 		}
 		DisplayNextSentence();
+	}
+
+	void Update(){
+		if(isSt && Input.GetKeyDown(KeyCode.C)){
+			DisplayNextSentence();
+		}
 	}
 
 	public void DisplayNextSentence()
@@ -62,6 +69,7 @@ public class DialogueManager : MonoBehaviour
 		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerContr>().UpdateCursor();
 		StartCoroutine("Game");
 		end = true;
+		isSt = false;
 	}
 
 	IEnumerator Game(){

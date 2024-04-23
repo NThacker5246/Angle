@@ -15,9 +15,8 @@ public class LoadST : MonoBehaviour
         ConfigState config = JsonUtility.FromJson<ConfigState>(file_config);
         string data = ReadNewTextFile(config.currentFile, "./Saves");
         StateOfGame gm = JsonUtility.FromJson<StateOfGame>(data);
-        if(loc == 1 && !config.isReset){
+        if(loc == 1 && !gm.isReset){
         	player.position = new Vector3(0,0,0);
-        	config.isReset = true;
         	Save();
         	string nc = JsonUtility.ToJson(config);
         	CreateNewTextFile(nc, "config.json", ".");
@@ -29,7 +28,7 @@ public class LoadST : MonoBehaviour
 
     public void Reset()
     {
-        StateOfGame gm = new StateOfGame(new Vector3(0,0,0), "", loc);
+        StateOfGame gm = new StateOfGame(new Vector3(0,0,0), "", loc, true);
         string data = JsonUtility.ToJson(gm);
         string file_config = ReadNewTextFile("config.json", ".");
         ConfigState config = JsonUtility.FromJson<ConfigState>(file_config);
@@ -39,7 +38,12 @@ public class LoadST : MonoBehaviour
     // Update is called once per frame
     public void Save()
     {
-        StateOfGame gm = new StateOfGame(player.position, "", loc);
+    	StateOfGame gm;
+    	if(loc == 1){
+			gm = new StateOfGame(player.position, "", loc, true);
+		} else {
+			gm = new StateOfGame(player.position, "", loc, false);
+		}
         string data = JsonUtility.ToJson(gm);
         string file_config = ReadNewTextFile("config.json", ".");
         ConfigState config = JsonUtility.FromJson<ConfigState>(file_config);
@@ -48,7 +52,7 @@ public class LoadST : MonoBehaviour
 
     public void SaveMap()
     {
-        StateOfGame gm = new StateOfGame(player.position, mapName, loc);
+        StateOfGame gm = new StateOfGame(player.position, mapName, loc, false);
         string data = JsonUtility.ToJson(gm);
         string file_config = ReadNewTextFile("config.json", ".");
         ConfigState config = JsonUtility.FromJson<ConfigState>(file_config);
@@ -59,7 +63,7 @@ public class LoadST : MonoBehaviour
     {
         using (StreamWriter sw = new StreamWriter(way + "/" + name,false))
 	    {
-	        sw.WriteLine(data);
+	        sw.Write(data);
 	    }
 
     }

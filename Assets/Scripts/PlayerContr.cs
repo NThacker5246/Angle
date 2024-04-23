@@ -88,7 +88,7 @@ public class PlayerContr : MonoBehaviour
 		rotationY += mouseX;
 		rotationZ = rotationZ % 360;
 		rotationY = rotationY % 360;
-
+		
 		if(rotationZ > -22 && rotationZ < 22){
 			vc = (new Vector3(0f, rotationY, rotationZ));
 			movement = Quaternion.Euler(new Vector3(0f, rotationY, rotationZ)) * movement;
@@ -116,6 +116,7 @@ public class PlayerContr : MonoBehaviour
 		} else {
 			return;
 		}
+	
 		//transform.eulerAngles = new Vector3(rotationY * sin(rotationZ), rotationY * cos(rotationZ), rotationZ);
 		//Debug.Log(sin(rotationZ));
 		//Debug.Log(cos(rotationZ));
