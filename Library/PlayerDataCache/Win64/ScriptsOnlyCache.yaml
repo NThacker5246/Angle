@@ -18,6 +18,7 @@ ScriptsOnlyBuild:
     - GameManager
     - GameSave
     - GameUIComp
+    - Help
     - Ids
     - LoadST
     - MenuSwap
@@ -45,8 +46,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -253,6 +256,9 @@ ScriptsOnlyBuild:
   - assembly: Assembly-CSharp
     fullTypeName: GameSave
     methodName: ReadGameState
+  - assembly: Assembly-CSharp
+    fullTypeName: Help
+    methodName: HelpMan
   - assembly: Assembly-CSharp
     fullTypeName: Pause
     methodName: Run
@@ -660,6 +666,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 8340}
     - Class: 114
       Script: {instanceID: 8490}
+    - Class: 114
+      Script: {instanceID: 26276}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -2032,6 +2040,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 57fd2fc9717934d3771d46b9126bc4e0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Help
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
@@ -2041,4 +2055,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Editor.unity
   - Assets/Scenes/TheRealEnd.unity
   - Assets/Scenes/PlayerMap.unity
-  playerPath: "C:/Users/nicol/Desktop/Build1021SP/\u041F\u043E\u0434\u0423\u0433\u043B\u043E\u043C.exe"
+  playerPath: "C:/Users/nicol/Desktop/Build1021aSP1/\u041F\u043E\u0434\u0423\u0433\u043B\u043E\u043C.exe"
