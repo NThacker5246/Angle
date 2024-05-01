@@ -65,7 +65,7 @@ public class GameSave : MonoBehaviour
 
 	public void CreateNewTextFile(string data, string name, string way)
     {
-        using (StreamWriter sw = new StreamWriter(way + "/" + name,true))
+        using (StreamWriter sw = new StreamWriter(way + "/" + name,false))
 	    {
 	        sw.WriteLine(data);
 	    }
