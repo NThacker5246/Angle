@@ -7,6 +7,7 @@ public class Box : MonoBehaviour
 	public bool inCollider;
 	public GameObject BoxItem;
 	public Transform player;
+	public PlayerContr pl;
 
 	private void Start(){
 		player = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
@@ -15,6 +16,7 @@ public class Box : MonoBehaviour
 	private void OnTriggerEnter(Collider other){
 		if(other.tag == "Player"){
 			inCollider = true;
+			pl = other.GetComponent<PlayerContr>();
 		}
 	}
 
@@ -25,8 +27,10 @@ public class Box : MonoBehaviour
 	}
 
 	public void Pickup(){
-		if(inCollider){
-			Instantiate(BoxItem, player);
+		if(inCollider && !pl.Get){
+			pl.Get = true;
+			GameObject gm = Instantiate(BoxItem, player);
+			gm.GetComponent<Pickup>().pl = pl;
 			Destroy(this.gameObject);
 		}
 	}

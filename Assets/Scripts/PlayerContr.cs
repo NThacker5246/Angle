@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerContr : MonoBehaviour
 {
 	public float speed = 10f;
+	public float max;
 	public float rotationY;
 	public float rotationZ;
 	public float G;
@@ -14,6 +15,10 @@ public class PlayerContr : MonoBehaviour
 	private Rigidbody rb;
 	public Saver save;
 	public Vector3 vc;
+	public Vector3 lastPosition;
+	public float angularSpeed;
+	public bool Get;
+
 	public void UpdateCursor()
 	{
 		if(flag == true){
@@ -125,10 +130,16 @@ public class PlayerContr : MonoBehaviour
 		//movement = Quaternion.Euler(new Vector3(rotationY*sin(rotationZ), rotationY*cos(rotationZ), rotationZ)) * movement;
 		
 		//Debug.Log(movement);
-		rb.AddForce(movement);
+		float angularVelocityX = Mathf.Max(transform.position.x, lastPosition.x) - Mathf.Min(transform.position.x, lastPosition.x);
+		float angularVelocityZ = Mathf.Max(transform.position.z, lastPosition.z) - Mathf.Min(transform.position.z, lastPosition.z);
+		angularSpeed = angularVelocityX + angularVelocityX;
+		if(angularSpeed < max){
+			rb.AddForce(movement);
+		} 
 		//transform.position += movement;
 		//vc = transform.position;
 		//vc = transform.eulerAngles;
+		lastPosition = transform.position;
 	}
 
 	private void Update(){
