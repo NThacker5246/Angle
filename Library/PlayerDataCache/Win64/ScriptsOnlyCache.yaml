@@ -7,6 +7,7 @@ ScriptsOnlyBuild:
     - Box
     - Button
     - CMPOS
+    - CPicker
     - ClicableButton
     - Controller
     - DialogueManager
@@ -111,6 +112,9 @@ ScriptsOnlyBuild:
     fullTypeName: LoadST
     methodName: Save
   - assembly: Assembly-CSharp
+    fullTypeName: Vol
+    methodName: SaveGM
+  - assembly: Assembly-CSharp
     fullTypeName: Pause
     methodName: ExitFromSettings
   - assembly: Assembly-CSharp
@@ -174,6 +178,12 @@ ScriptsOnlyBuild:
     fullTypeName: PosController
     methodName: WriteAct
   - assembly: Assembly-CSharp
+    fullTypeName: CPicker
+    methodName: SetColor
+  - assembly: Assembly-CSharp
+    fullTypeName: CPicker
+    methodName: SetColor
+  - assembly: Assembly-CSharp
     fullTypeName: PosController
     methodName: Write
   - assembly: Assembly-CSharp
@@ -198,14 +208,23 @@ ScriptsOnlyBuild:
     fullTypeName: PosController
     methodName: Write
   - assembly: Assembly-CSharp
+    fullTypeName: CPicker
+    methodName: SetColor
+  - assembly: Assembly-CSharp
     fullTypeName: SaveToFile
     methodName: Save
   - assembly: Assembly-CSharp
     fullTypeName: PauseCreator
     methodName: Resume
   - assembly: Assembly-CSharp
+    fullTypeName: CPicker
+    methodName: SetColor
+  - assembly: Assembly-CSharp
     fullTypeName: PosController
     methodName: Write
+  - assembly: Assembly-CSharp
+    fullTypeName: CPicker
+    methodName: SetColor
   - assembly: Assembly-CSharp
     fullTypeName: PauseCreator
     methodName: EXIT
@@ -214,22 +233,34 @@ ScriptsOnlyBuild:
     methodName: Write
   - assembly: Assembly-CSharp
     fullTypeName: MenuSwap
-    methodName: UsSwap
+    methodName: SwapSET
   - assembly: Assembly-CSharp
     fullTypeName: SaveToFile
     methodName: Load
   - assembly: Assembly-CSharp
-    fullTypeName: MenuSwap
-    methodName: UsSwapL
-  - assembly: Assembly-CSharp
     fullTypeName: OnStarter
     methodName: SetUp
+  - assembly: Assembly-CSharp
+    fullTypeName: CPicker
+    methodName: SaveSettings
+  - assembly: Assembly-CSharp
+    fullTypeName: MenuSwap
+    methodName: UsSwapSET
+  - assembly: Assembly-CSharp
+    fullTypeName: MenuSwap
+    methodName: UsSwapL
   - assembly: Assembly-CSharp
     fullTypeName: PosController
     methodName: ShHi
   - assembly: Assembly-CSharp
     fullTypeName: PosController
     methodName: Write
+  - assembly: Assembly-CSharp
+    fullTypeName: MenuSwap
+    methodName: UsSwap
+  - assembly: Assembly-CSharp
+    fullTypeName: CPicker
+    methodName: SetColor
   - assembly: Assembly-CSharp
     fullTypeName: Fade
     methodName: FadeToLevel
@@ -331,37 +362,41 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4438}
     - Class: 114
-      Script: {instanceID: 5258}
+      Script: {instanceID: 4998}
     - Class: 114
-      Script: {instanceID: 5294}
+      Script: {instanceID: 5260}
     - Class: 114
-      Script: {instanceID: 5538}
+      Script: {instanceID: 5296}
     - Class: 114
-      Script: {instanceID: 5664}
+      Script: {instanceID: 5318}
     - Class: 114
-      Script: {instanceID: 5994}
+      Script: {instanceID: 5540}
     - Class: 114
-      Script: {instanceID: 6170}
+      Script: {instanceID: 5666}
     - Class: 114
-      Script: {instanceID: 6186}
+      Script: {instanceID: 5996}
     - Class: 114
-      Script: {instanceID: 6530}
+      Script: {instanceID: 6172}
     - Class: 114
-      Script: {instanceID: 6538}
+      Script: {instanceID: 6188}
     - Class: 114
-      Script: {instanceID: 7146}
+      Script: {instanceID: 6532}
     - Class: 114
-      Script: {instanceID: 7412}
+      Script: {instanceID: 6540}
     - Class: 114
-      Script: {instanceID: 7680}
+      Script: {instanceID: 7148}
     - Class: 114
-      Script: {instanceID: 7756}
+      Script: {instanceID: 7414}
     - Class: 114
-      Script: {instanceID: 8344}
+      Script: {instanceID: 7682}
     - Class: 114
-      Script: {instanceID: 8494}
+      Script: {instanceID: 7758}
     - Class: 114
-      Script: {instanceID: 8540}
+      Script: {instanceID: 8346}
+    - Class: 114
+      Script: {instanceID: 8496}
+    - Class: 114
+      Script: {instanceID: 8542}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -424,13 +459,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4214}
     - Class: 114
-      Script: {instanceID: 5590}
+      Script: {instanceID: 5592}
     - Class: 114
-      Script: {instanceID: 5994}
+      Script: {instanceID: 5996}
     - Class: 114
-      Script: {instanceID: 6530}
+      Script: {instanceID: 6532}
     - Class: 114
-      Script: {instanceID: 8494}
+      Script: {instanceID: 8496}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -527,25 +562,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4990}
     - Class: 114
-      Script: {instanceID: 5294}
+      Script: {instanceID: 5296}
     - Class: 114
-      Script: {instanceID: 5316}
+      Script: {instanceID: 5318}
     - Class: 114
-      Script: {instanceID: 5664}
+      Script: {instanceID: 5666}
     - Class: 114
-      Script: {instanceID: 5994}
+      Script: {instanceID: 5996}
     - Class: 114
-      Script: {instanceID: 6392}
+      Script: {instanceID: 6394}
     - Class: 114
-      Script: {instanceID: 6530}
+      Script: {instanceID: 6532}
     - Class: 114
-      Script: {instanceID: 7240}
+      Script: {instanceID: 7242}
     - Class: 114
-      Script: {instanceID: 7680}
+      Script: {instanceID: 7682}
     - Class: 114
-      Script: {instanceID: 8344}
+      Script: {instanceID: 8346}
     - Class: 114
-      Script: {instanceID: 8494}
+      Script: {instanceID: 8496}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -646,31 +681,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4990}
     - Class: 114
-      Script: {instanceID: 5258}
+      Script: {instanceID: 5260}
     - Class: 114
-      Script: {instanceID: 5294}
+      Script: {instanceID: 5296}
     - Class: 114
-      Script: {instanceID: 5664}
+      Script: {instanceID: 5666}
     - Class: 114
-      Script: {instanceID: 5994}
+      Script: {instanceID: 5996}
     - Class: 114
-      Script: {instanceID: 6170}
+      Script: {instanceID: 6172}
     - Class: 114
-      Script: {instanceID: 6530}
+      Script: {instanceID: 6532}
     - Class: 114
-      Script: {instanceID: 6538}
+      Script: {instanceID: 6540}
     - Class: 114
-      Script: {instanceID: 7240}
+      Script: {instanceID: 7242}
     - Class: 114
-      Script: {instanceID: 7412}
+      Script: {instanceID: 7414}
     - Class: 114
-      Script: {instanceID: 7680}
+      Script: {instanceID: 7682}
     - Class: 114
-      Script: {instanceID: 7756}
+      Script: {instanceID: 7758}
     - Class: 114
-      Script: {instanceID: 8344}
+      Script: {instanceID: 8346}
     - Class: 114
-      Script: {instanceID: 8494}
+      Script: {instanceID: 8496}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -779,27 +814,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4990}
     - Class: 114
-      Script: {instanceID: 5294}
+      Script: {instanceID: 5296}
     - Class: 114
-      Script: {instanceID: 5316}
+      Script: {instanceID: 5318}
     - Class: 114
-      Script: {instanceID: 5452}
+      Script: {instanceID: 5454}
     - Class: 114
-      Script: {instanceID: 5664}
+      Script: {instanceID: 5666}
     - Class: 114
-      Script: {instanceID: 5994}
+      Script: {instanceID: 5996}
     - Class: 114
-      Script: {instanceID: 6392}
+      Script: {instanceID: 6394}
     - Class: 114
-      Script: {instanceID: 6530}
+      Script: {instanceID: 6532}
     - Class: 114
-      Script: {instanceID: 7240}
+      Script: {instanceID: 7242}
     - Class: 114
-      Script: {instanceID: 7680}
+      Script: {instanceID: 7682}
     - Class: 114
-      Script: {instanceID: 8344}
+      Script: {instanceID: 8346}
     - Class: 114
-      Script: {instanceID: 8494}
+      Script: {instanceID: 8496}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -858,17 +893,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3234}
     - Class: 114
-      Script: {instanceID: 5590}
+      Script: {instanceID: 5592}
     - Class: 114
-      Script: {instanceID: 5664}
+      Script: {instanceID: 5666}
     - Class: 114
-      Script: {instanceID: 5994}
+      Script: {instanceID: 5996}
     - Class: 114
-      Script: {instanceID: 6530}
+      Script: {instanceID: 6532}
     - Class: 114
-      Script: {instanceID: 7394}
+      Script: {instanceID: 7396}
     - Class: 114
-      Script: {instanceID: 8494}
+      Script: {instanceID: 8496}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -919,13 +954,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3234}
     - Class: 114
-      Script: {instanceID: 5664}
+      Script: {instanceID: 5666}
     - Class: 114
-      Script: {instanceID: 5994}
+      Script: {instanceID: 5996}
     - Class: 114
-      Script: {instanceID: 6530}
+      Script: {instanceID: 6532}
     - Class: 114
-      Script: {instanceID: 8494}
+      Script: {instanceID: 8496}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1203,7 +1238,7 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: b91ef66022f87d8f4131ddc057e5c97d
+      Hash: cf04be7d8465431063ec19774a9a4846
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuSwap
@@ -1263,7 +1298,7 @@ ScriptsOnlyBuild:
     className: EndOfGame
   - hash:
       serializedVersion: 2
-      Hash: cc9e9c1e98cd2c645155f78e264424e8
+      Hash: 010ab2f82c9dcfd7411fc65827d163fd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Vol
@@ -1555,6 +1590,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: ActivationPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 345115ef2a1df2fae6e17d22d34e43dd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CPicker
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f

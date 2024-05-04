@@ -101,7 +101,7 @@ public class SaveToFile : MonoBehaviour
 		//deb.text += ", file"; 
 		editor.allBlocks = new GameObject[read.data.Length];
 		editor.iOfb = 0;
-		int i=0;
+		//int i=0;
 		foreach(string json in read.data){
 			//deb.text += ""+i;
 			Bk realData = JsonUtility.FromJson<Bk>(json);

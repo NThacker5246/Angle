@@ -6,6 +6,7 @@ public class MenuSwap : MonoBehaviour
 {
 	public GameObject load;
 	public GameObject save;
+	public GameObject stin;
 
 	public void Swap(){
 		load.SetActive(true);
@@ -19,5 +20,12 @@ public class MenuSwap : MonoBehaviour
 	}
 	public void UsSwapL(){
 		save.SetActive(false);
+	}
+
+	public void SwapSET(){
+		stin.SetActive(true);
+	}
+	public void UsSwapSET(){
+		stin.SetActive(false);
 	}
 }
