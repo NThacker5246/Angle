@@ -8894,15 +8894,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2302638722594285056, guid: 9854b229753fb52439787ffa1e1d7758, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2302638722594285056, guid: 9854b229753fb52439787ffa1e1d7758, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2302638722594285056, guid: 9854b229753fb52439787ffa1e1d7758, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2302638722594285056, guid: 9854b229753fb52439787ffa1e1d7758, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10556,6 +10556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  max: 0.1
   rotationY: 0
   rotationZ: 0
   G: 2
@@ -10563,6 +10564,9 @@ MonoBehaviour:
   isGrounded: 1
   save: {fileID: 0}
   vc: {x: 0, y: 0, z: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
+  angularSpeed: 0
+  Get: 0
 --- !u!65 &1993302822
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11522,15 +11526,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2302638722594285056, guid: 9854b229753fb52439787ffa1e1d7758, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.39
+      value: 28.4
       objectReference: {fileID: 0}
     - target: {fileID: 2302638722594285056, guid: 9854b229753fb52439787ffa1e1d7758, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2302638722594285056, guid: 9854b229753fb52439787ffa1e1d7758, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2302638722594285056, guid: 9854b229753fb52439787ffa1e1d7758, type: 3}
       propertyPath: m_LocalRotation.w

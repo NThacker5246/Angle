@@ -67,6 +67,8 @@ public class PosController : MonoBehaviour
 						sel.GetComponent<Button>().ActionObject = act;
 					} else if(sel.GetComponent<ClicableButton>() != null){
 						sel.GetComponent<ClicableButton>().ActionObject = act;
+					} else if(sel.GetComponent<PlayerButton>() != null){
+						sel.GetComponent<PlayerButton>().ActionObject = act;
 					}
 				}
 				if(VMc.allBlocks[id].GetComponent<Teleport>()){
@@ -90,6 +92,8 @@ public class PosController : MonoBehaviour
 					s = sel.GetComponent<ClicableButton>().ActionObject.transform.name;
 				} else if(sel.GetComponent<Teleport>()){
 					s = sel.GetComponent<Teleport>().SecondTeleport.name;
+				} else if(sel.GetComponent<PlayerButton>() != null){
+					s = sel.GetComponent<PlayerButton>().ActionObject.transform.name;
 				}
 				idOfAct.text = s;
 			}
