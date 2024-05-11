@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Globalization;
 
 public class PosController : MonoBehaviour
 {
@@ -29,15 +30,15 @@ public class PosController : MonoBehaviour
 	public void Read(){
 		if(VMc.sel != null){
 			Transform sel = VMc.sel.transform;
-			PX.text = "" + (int)sel.position.x;
-			PY.text = "" + (int)sel.position.y;
-			PZ.text = "" + (int)sel.position.z;
-			RX.text = "" + (int)sel.eulerAngles.x;
-			RY.text = "" + (int)sel.eulerAngles.y;
-			RZ.text = "" + (int)sel.eulerAngles.z;
-			SX.text = "" + (int)sel.localScale.x;
-			SY.text = "" + (int)sel.localScale.y;
-			SZ.text = "" + (int)sel.localScale.z;
+			PX.text = "" + (float)sel.position.x;
+			PY.text = "" + (float)sel.position.y;
+			PZ.text = "" + (float)sel.position.z;
+			RX.text = "" + (float)sel.eulerAngles.x;
+			RY.text = "" + (float)sel.eulerAngles.y;
+			RZ.text = "" + (float)sel.eulerAngles.z;
+			SX.text = "" + (float)sel.localScale.x;
+			SY.text = "" + (float)sel.localScale.y;
+			SZ.text = "" + (float)sel.localScale.z;
 			id.text = sel.name;
 			ReadAct();
 		}
@@ -46,9 +47,9 @@ public class PosController : MonoBehaviour
 		try{
 			if(VMc.sel != null && PX.text != ""){
 				Transform sel = VMc.sel.transform;
-				sel.position = new Vector3(int.Parse(PX.text), int.Parse(PY.text), int.Parse(PZ.text));
-				sel.eulerAngles = new Vector3(int.Parse(RX.text), int.Parse(RY.text), int.Parse(RZ.text));
-				sel.localScale = new Vector3(int.Parse(SX.text), int.Parse(SY.text), int.Parse(SZ.text));
+				sel.position = new Vector3(float.Parse(PX.text, CultureInfo.InvariantCulture.NumberFormat), float.Parse(PY.text, CultureInfo.InvariantCulture.NumberFormat), float.Parse(PZ.text, CultureInfo.InvariantCulture.NumberFormat));
+				sel.eulerAngles = new Vector3(float.Parse(RX.text, CultureInfo.InvariantCulture.NumberFormat), float.Parse(RY.text, CultureInfo.InvariantCulture.NumberFormat), float.Parse(RZ.text, CultureInfo.InvariantCulture.NumberFormat));
+				sel.localScale = new Vector3(float.Parse(SX.text, CultureInfo.InvariantCulture.NumberFormat), float.Parse(SY.text, CultureInfo.InvariantCulture.NumberFormat), float.Parse(SZ.text, CultureInfo.InvariantCulture.NumberFormat));
 
 			}
 		} catch {
@@ -124,7 +125,7 @@ public class PosController : MonoBehaviour
 			if(VMc.sel != null){
 				Transform sel = VMc.sel.transform;
 				string tempIdStr = sel.name;
-				int tempId = int.Parse(tempIdStr);
+				int tempId = float.Parse(tempIdS, CultureInfo.InvariantCulture.NumberFormattr);
 				GameObject[] tempArr = VMc.allBlocks;
 				GameObject[] newArr = new GameObject[tempArr.Length];
 				int i = 0;
