@@ -27,20 +27,23 @@ public class PosController : MonoBehaviour
 	public Animator butt;
 	public bool isOpen;
 
+	public TextureChanger tx;
+
 	public void Read(){
 		if(VMc.sel != null){
 			Transform sel = VMc.sel.transform;
-			PX.text = "" + (float)sel.position.x;
-			PY.text = "" + (float)sel.position.y;
-			PZ.text = "" + (float)sel.position.z;
-			RX.text = "" + (float)sel.eulerAngles.x;
-			RY.text = "" + (float)sel.eulerAngles.y;
-			RZ.text = "" + (float)sel.eulerAngles.z;
-			SX.text = "" + (float)sel.localScale.x;
-			SY.text = "" + (float)sel.localScale.y;
-			SZ.text = "" + (float)sel.localScale.z;
+			PX.text = ("" + sel.position.x).Replace(",", ".");
+			PY.text = ("" + sel.position.y).Replace(",", ".");
+			PZ.text = ("" + sel.position.z).Replace(",", ".");
+			RX.text = ("" + sel.eulerAngles.x).Replace(",", ".");
+			RY.text = ("" + sel.eulerAngles.y).Replace(",", ".");
+			RZ.text = ("" + sel.eulerAngles.z).Replace(",", ".");
+			SX.text = ("" + sel.localScale.x).Replace(",", ".");
+			SY.text = ("" + sel.localScale.y).Replace(",", ".");
+			SZ.text = ("" + sel.localScale.z).Replace(",", ".");
 			id.text = sel.name;
 			ReadAct();
+			tx.ReadTexture();
 		}
 	}
 	public void Write(){

@@ -17,6 +17,7 @@ public class CPicker : MonoBehaviour
 	public Image InspectorG;
 	public Image StartWin;
 	public Image openclose;
+	public Image[] bt;
 	public Text id1;
 	public Text id2;
 	public Image[] texts;
@@ -39,6 +40,10 @@ public class CPicker : MonoBehaviour
 		id2.color = text;
 		foreach(Image t in texts){
 			t.color = text;
+		}
+
+		foreach(Image t in bt){
+			t.color = back;
 		}
 
 	}

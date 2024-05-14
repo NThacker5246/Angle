@@ -20,7 +20,12 @@ public struct Bk{
 	public int globId;
 	//if this obj button - link to act obj | string can have "", but int primary 0
 	public string linkId;
-	public Bk(Vector3 pos, Vector3 rot, Vector3 scl, int gri, int gli, string linkId){
+
+	//Colorful if this - block
+	public bool isBlock;
+	public Color32 col;
+
+	public Bk(Vector3 pos, Vector3 rot, Vector3 scl, int gri, int gli, string linkId, Color32 col){
 		this.pos = pos;
 		this.rot = rot;
 		this.scl = scl;
@@ -28,5 +33,12 @@ public struct Bk{
 		this.globId = gli;
 		this.linkId = linkId;
 		this.isSet = true;
+		if(this.groupId == 0 && this.globId == 0){
+			this.isBlock = true;
+			this.col = col;
+		} else {
+			this.col = new Color32(0, 0, 0, 0);
+			this.isBlock = false;
+		}
 	}
 }

@@ -35,7 +35,13 @@ public class SaveToFile : MonoBehaviour
 					Transform ActionObject = object1.GetComponent<Teleport>().SecondTeleport;
 					if(ActionObject != null){id = ActionObject.name;}
 				}
-				data.blocks[k] = new Bk(pos, rot, scl, object1.GetComponent<Ids>().groupId, object1.GetComponent<Ids>().mainId, id);
+				Color32 color1;
+				if(object1.GetComponent<Renderer>() != null){
+					color1 = object1.GetComponent<Renderer>().material.color;
+				} else {
+					color1 = new Color32(0, 0, 0, 0);
+				}
+				data.blocks[k] = new Bk(pos, rot, scl, object1.GetComponent<Ids>().groupId, object1.GetComponent<Ids>().mainId, id, color1);
 				//data.blocks[k].isSet = true;
 				//data.blocks[k].pos = pos;
 				//data.blocks[k].rot = rot;
@@ -76,6 +82,9 @@ public class SaveToFile : MonoBehaviour
 				editor.allBlocks[editor.iOfb] = block;
 				editor.iOfb += 1;
 				block.transform.name = "" + (editor.iOfb-1);
+				if(realData.isBlock == true){
+					block.GetComponent<Renderer>().material.color = realData.col;
+				}
 			}
 		}
 		int j = 0;
@@ -112,6 +121,9 @@ public class SaveToFile : MonoBehaviour
 				editor.allBlocks[editor.iOfb] = block;
 				editor.iOfb += 1;
 				block.transform.name = "" + (editor.iOfb-1);
+				if(realData.isBlock == true){
+					block.GetComponent<Renderer>().material.color = realData.col;
+				}
 			}
 		}
 		//deb.text += ", blocked";
