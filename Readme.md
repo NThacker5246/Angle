@@ -1,27 +1,27 @@
 <div style="font-family: 'Consolas';">
 <h5>The Angle</h5> Game:
 
-<b>Editor controls</b>:
-WASD + Space/Shift - movement
-Mouse - camera rotation (free)
-C - open/close inspector
-Q/E - +/- group
-1-9 - block (both here and there are clamps, jam without bugs)
-LMB - block selection
-RMB - new block
-Alt (Both side) - change cursor (open/hide) and lock/unlock player controls
+<b>Editor controls</b>:<br>
+WASD + Space/Shift - movement<br>
+Mouse - camera rotation (free)<br>
+C - open/close inspector<br>
+Q/E - +/- group<br>
+1-9 - block (both here and there are clamps, jam without bugs)<br>
+LMB - block selection<br>
+RMB - new block<br>
+Alt (Both side) - change cursor (open/hide) and lock/unlock player controls<br>
 
-<b>Game controls</b>:
-WASD - movement
-Mouse - camera rotation
-E - use (press the small button)
-Q - drop block
-E - pick up block
-R - teleport
-F/G - camera rotation in Z
-C - Skip MrBeast Dialogue
+<b>Game controls</b>:<br>
+WASD - movement<br>
+Mouse - camera rotation<br>
+E - use (press the small button)<br>
+Q - drop block<br>
+E - pick up block<br>
+R - teleport<br>
+F/G - camera rotation in Z<br>
+C - Skip MrBeast Dialogue<br>
 
-<i>Press FG to change the angle (in the menu too)</i>
+<i>Press FG to change the angle (in the menu too)</i><br>
 
 <b>How to link object</b>:
 1. Place trigger block (buttons, 2nd group)
