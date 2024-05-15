@@ -18,6 +18,7 @@ public class SaveToFile : MonoBehaviour
 
 	public void Save(){
 		FileData data = new FileData();
+		data.blocks = new Bk[editor.allBlocks.Length];
 		int k = 0;
 		foreach(GameObject object1 in editor.allBlocks){
 			if(object1 != null){
@@ -67,6 +68,7 @@ public class SaveToFile : MonoBehaviour
 		}
 		//JsonUtility
 		Save test = new Save();
+		test.data = new string[editor.allBlocks.Length];
 		k = 0;
 		foreach(Bk blk in data.blocks){
 			string dat = JsonUtility.ToJson(blk);
@@ -86,6 +88,7 @@ public class SaveToFile : MonoBehaviour
 		string data1 = ReadNewTextFile(Lname.text, ways[Lway.value]);
 		Save read = JsonUtility.FromJson<Save>(data1);
 		editor.iOfb = 0;
+		editor.allBlocks = new GameObject[read.data.Length];
 		foreach(string json in read.data){
 			Bk realData = JsonUtility.FromJson<Bk>(json);
 			if(realData.isSet == true){

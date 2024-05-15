@@ -39,7 +39,7 @@ public class Controller : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			UpdateCursor();
 		}
-		if(Input.GetKeyDown(KeyCode.I)){
+		if(Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown(KeyCode.RightAlt)){
 			UpdateCursor();
 		}
 	}
