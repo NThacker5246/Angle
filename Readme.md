@@ -1,5 +1,5 @@
 <div style="font-family: 'Consolas';">
-<h5>The Angle</h5> Game:
+<b style="font-size: 30px;">The Angle Game:</b>
 
 <b>Editor controls</b>:
 WASD + Space/Shift - movement
