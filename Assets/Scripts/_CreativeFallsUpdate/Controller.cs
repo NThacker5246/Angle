@@ -23,16 +23,18 @@ public class Controller : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-		float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-		rotationY += mouseX;
-		rotationX -= mouseY;
-		transform.localRotation = Quaternion.Euler(rotationX, rotationY, 0f);
-		if (Input.GetKey(KeyCode.Space)) {
-			transform.position += new Vector3(0f, up, 0f);
-		}
-		if (Input.GetKey(KeyCode.LeftShift)) {
-			transform.position += new Vector3(0f, up*-1, 0f);
+		if(!Cursor.visible) {
+			float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+			float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+			rotationY += mouseX;
+			rotationX -= mouseY;
+			transform.localRotation = Quaternion.Euler(rotationX, rotationY, 0f);
+			if (Input.GetKey(KeyCode.Space)) {
+				transform.position += new Vector3(0f, up, 0f);
+			}
+			if (Input.GetKey(KeyCode.LeftShift)) {
+				transform.position += new Vector3(0f, up*-1, 0f);
+			}
 		}
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			UpdateCursor();
@@ -43,12 +45,14 @@ public class Controller : MonoBehaviour
 	}
 
 	void FixedUpdate(){
-		float horiz = Input.GetAxis("Horizontal") * speed;
-		float vertic = Input.GetAxis("Vertical") * speed;
-		Vector3 vector = new Vector3(horiz, 0f, vertic);
-		vector = Quaternion.Euler(0f, rotationY, 0f) * vector;
-		//rb.AddForce(vector);
-		transform.position += vector;
+		if(!Cursor.visible) {
+			float horiz = Input.GetAxis("Horizontal") * speed;
+			float vertic = Input.GetAxis("Vertical") * speed;
+			Vector3 vector = new Vector3(horiz, 0f, vertic);
+			vector = Quaternion.Euler(0f, rotationY, 0f) * vector;
+			//rb.AddForce(vector);
+			transform.position += vector;
+		}
 	}
 
 	public void LockCursor()

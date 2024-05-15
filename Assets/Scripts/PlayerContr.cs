@@ -71,7 +71,7 @@ public class PlayerContr : MonoBehaviour
 
 	private void Start(){
 		rb = GetComponent<Rigidbody>();
-		transform.position = save.playerPos;
+		//transform.position = save.playerPos;
 		Debug.Log(cos(180));
 		Debug.Log(Mathf.Cos(180));
 	}

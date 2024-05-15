@@ -28,6 +28,7 @@ public class PosController : MonoBehaviour
 	public bool isOpen;
 
 	public TextureChanger tx;
+	public LightChanger lg;
 
 	public void Read(){
 		if(VMc.sel != null){
@@ -44,6 +45,7 @@ public class PosController : MonoBehaviour
 			id.text = sel.name;
 			ReadAct();
 			tx.ReadTexture();
+			lg.GetLight();
 		}
 	}
 	public void Write(){
@@ -112,6 +114,7 @@ public class PosController : MonoBehaviour
 			if(VMc.sel != null && PX.text != ""){
 				Transform sel = VMc.sel.transform;
 				GameObject block = Instantiate(sel.gameObject, sel.position, Quaternion.identity);
+				block.transform.eulerAngles = sel.eulerAngles;
 	            VMc.allBlocks[VMc.iOfb] = block;
 	            VMc.iOfb += 1;
 	            block.transform.name = "" + (VMc.iOfb-1);

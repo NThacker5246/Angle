@@ -35,6 +35,8 @@ public class AdvancedShow : MonoBehaviour
 			if(ids.mainId == 0 && ids.groupId == 0){
 				SetWindow(0);
 				tx.ReadTexture();
+			} else if(ids.groupId == 3){
+				SetWindow(1);
 			}
 		}
 	}

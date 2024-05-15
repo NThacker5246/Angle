@@ -41,7 +41,20 @@ public class SaveToFile : MonoBehaviour
 				} else {
 					color1 = new Color32(0, 0, 0, 0);
 				}
-				data.blocks[k] = new Bk(pos, rot, scl, object1.GetComponent<Ids>().groupId, object1.GetComponent<Ids>().mainId, id, color1);
+				float range;
+				float spotAngle;
+				float intensity;
+				if(object1.GetComponent<Light>() != null){
+					Light l = object1.GetComponent<Light>();
+					range = l.range;
+					spotAngle = l.spotAngle;
+					intensity = l.intensity;
+				} else {
+					range = 0;
+					spotAngle = 0;
+					intensity = 0;
+				}
+				data.blocks[k] = new Bk(pos, rot, scl, object1.GetComponent<Ids>().groupId, object1.GetComponent<Ids>().mainId, id, color1, intensity, range, spotAngle);
 				//data.blocks[k].isSet = true;
 				//data.blocks[k].pos = pos;
 				//data.blocks[k].rot = rot;
@@ -85,6 +98,12 @@ public class SaveToFile : MonoBehaviour
 				if(realData.isBlock == true){
 					block.GetComponent<Renderer>().material.color = realData.col;
 				}
+				if(realData.isLight){
+					Light l = block.GetComponent<Light>();
+					l.intensity = realData.intensity;
+					l.range = realData.range;
+					l.spotAngle = realData.spotAngle;
+				}
 			}
 		}
 		int j = 0;
@@ -123,6 +142,14 @@ public class SaveToFile : MonoBehaviour
 				block.transform.name = "" + (editor.iOfb-1);
 				if(realData.isBlock == true){
 					block.GetComponent<Renderer>().material.color = realData.col;
+				}
+
+				if(realData.isLight){
+					Light l = block.GetComponent<Light>();
+					l.intensity = realData.intensity;
+					l.range = realData.range;
+					l.spotAngle = realData.spotAngle;
+					Destroy(block.GetComponent<Renderer>());
 				}
 			}
 		}

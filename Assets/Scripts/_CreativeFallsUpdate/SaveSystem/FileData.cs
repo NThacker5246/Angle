@@ -25,7 +25,13 @@ public struct Bk{
 	public bool isBlock;
 	public Color32 col;
 
-	public Bk(Vector3 pos, Vector3 rot, Vector3 scl, int gri, int gli, string linkId, Color32 col){
+	//light if this - light
+	public bool isLight;
+	public float intensity;
+	public float range;
+	public float spotAngle;
+
+	public Bk(Vector3 pos, Vector3 rot, Vector3 scl, int gri, int gli, string linkId, Color32 col, float intensity, float range, float spotAngle){
 		this.pos = pos;
 		this.rot = rot;
 		this.scl = scl;
@@ -39,6 +45,18 @@ public struct Bk{
 		} else {
 			this.col = new Color32(0, 0, 0, 0);
 			this.isBlock = false;
+		}
+
+		if(this.groupId == 3) {
+			this.isLight = true;
+			this.intensity = intensity;
+			this.range = range;
+			this.spotAngle = spotAngle;
+		} else {
+			this.isLight = false;
+			this.intensity = 0;
+			this.range = 0;
+			this.spotAngle = 0;
 		}
 	}
 }
