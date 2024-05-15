@@ -1,5 +1,4 @@
-<div style="font-family: 'Consolas';">
-<h5>The Angle</h5> Game:
+<b style="font-size: 30px;">The Angle Game:</b>
 
 <b>Editor controls</b>:<br>
 WASD + Space/Shift - movement<br>
@@ -32,4 +31,3 @@ C - Skip MrBeast Dialogue<br>
 <b>How to edit block color or light configuration</b>:
 1. Open Inspector (c, click right up button)
 2. Click Advanced settings
-</div>
