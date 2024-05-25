@@ -55,7 +55,38 @@ public class SaveToFile : MonoBehaviour
 					spotAngle = 0;
 					intensity = 0;
 				}
-				data.blocks[k] = new Bk(pos, rot, scl, object1.GetComponent<Ids>().groupId, object1.GetComponent<Ids>().mainId, id, color1, intensity, range, spotAngle);
+
+				Vector3 thisPosition;
+				Vector3 newPosition;
+				int speed;
+				string id1;
+				int[] ids;
+
+				if(object1.GetComponent<Trigger>() != null){
+					Trigger tg = object1.GetComponent<Trigger>();
+					thisPosition = tg.thisPosition;
+					newPosition = tg.newPosition;
+					speed = tg.speed;
+					if(tg.gm != null){
+						id1 = tg.gm.transform.name;
+					} else {
+						id1 = "";
+					}
+					ids = new int[tg.triggers.Length];
+					int m = 0;
+					foreach(GameObject t in tg.triggers){
+						ids[m] = int.Parse(t.transform.name);
+						m += 1;
+					}
+				} else {
+					thisPosition = new Vector3(0,0,0);
+					newPosition = new Vector3(0,0,0);
+					speed = 0;
+					id1 = "";
+					ids = new int[0]; 
+				}
+
+				data.blocks[k] = new Bk(pos, rot, scl, object1.GetComponent<Ids>().groupId, object1.GetComponent<Ids>().mainId, id, color1, intensity, range, spotAngle, thisPosition, newPosition, speed, ids, id1);
 				//data.blocks[k].isSet = true;
 				//data.blocks[k].pos = pos;
 				//data.blocks[k].rot = rot;
@@ -107,6 +138,12 @@ public class SaveToFile : MonoBehaviour
 					l.range = realData.range;
 					l.spotAngle = realData.spotAngle;
 				}
+				if(realData.isT){
+					Trigger t = block.GetComponent<Trigger>();
+					t.thisPosition = realData.thisPosition;
+					t.newPosition = realData.newPosition;
+					t.speed = realData.speed;
+				}
 			}
 		}
 		int j = 0;
@@ -120,6 +157,20 @@ public class SaveToFile : MonoBehaviour
 					editor.allBlocks[j].GetComponent<ClicableButton>().ActionObject = editor.allBlocks[id].GetComponent<ActedObject>();
 				} else if(editor.allBlocks[j].GetComponent<Teleport>() != null){
 					editor.allBlocks[j].GetComponent<Teleport>().SecondTeleport = editor.allBlocks[id].GetComponent<Transform>();
+				}
+			}
+
+			if(realData.isT){
+				Trigger t = editor.allBlocks[j].GetComponent<Trigger>();
+				if(realData.id != ""){
+					t.gm = editor.allBlocks[int.Parse(realData.id)];
+				} else {
+					t.triggers = new GameObject[realData.ids.Length];
+					int k = 0;
+					foreach(int it in realData.ids){
+						t.triggers[k] = editor.allBlocks[it];
+						k += 1;
+					}
 				}
 			}
 			j += 1;
@@ -154,6 +205,14 @@ public class SaveToFile : MonoBehaviour
 					l.spotAngle = realData.spotAngle;
 					Destroy(block.GetComponent<Renderer>());
 				}
+
+				if(realData.isT){
+					Trigger t = block.GetComponent<Trigger>();
+					t.thisPosition = realData.thisPosition;
+					t.newPosition = realData.newPosition;
+					t.speed = realData.speed;
+					Destroy(block.GetComponent<Renderer>());
+				}
 			}
 		}
 		//deb.text += ", blocked";
@@ -168,6 +227,20 @@ public class SaveToFile : MonoBehaviour
 					editor.allBlocks[j].GetComponent<ClicableButton>().ActionObject = editor.allBlocks[id].GetComponent<ActedObject>();
 				} else if(editor.allBlocks[j].GetComponent<Teleport>() != null){
 					editor.allBlocks[j].GetComponent<Teleport>().SecondTeleport = editor.allBlocks[id].GetComponent<Transform>();
+				}
+			}
+
+			if(realData.isT){
+				Trigger t = editor.allBlocks[j].GetComponent<Trigger>();
+				if(realData.id != ""){
+					t.gm = editor.allBlocks[int.Parse(realData.id)];
+				} else {
+					t.triggers = new GameObject[realData.ids.Length];
+					int k = 0;
+					foreach(int it in realData.ids){
+						t.triggers[k] = editor.allBlocks[it];
+						k += 1;
+					}
 				}
 			}
 			j += 1;

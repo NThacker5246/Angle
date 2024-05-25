@@ -29,6 +29,7 @@ public class PosController : MonoBehaviour
 
 	public TextureChanger tx;
 	public LightChanger lg;
+	public TriggerSetup ts;
 
 	public void Read(){
 		if(VMc.sel != null){
@@ -46,6 +47,7 @@ public class PosController : MonoBehaviour
 			ReadAct();
 			tx.ReadTexture();
 			lg.GetLight();
+			ts.ReadTrigger();
 		}
 	}
 	public void Write(){

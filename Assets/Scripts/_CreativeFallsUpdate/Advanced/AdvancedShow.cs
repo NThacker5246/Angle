@@ -8,6 +8,7 @@ public class AdvancedShow : MonoBehaviour
 	public GameObject[] functionsComp;
 	public BlockEditor be;
 	public TextureChanger tx;
+	public TriggerSetup ts;
 
 	public void SetWindow(int n){
 		GUIWindow.SetActive(true);
@@ -37,6 +38,10 @@ public class AdvancedShow : MonoBehaviour
 				tx.ReadTexture();
 			} else if(ids.groupId == 3){
 				SetWindow(1);
+			} else if(ids.groupId == 4){
+				SetWindow(2);
+				ts.ShowTg();
+				ts.ReadTrigger();
 			}
 		}
 	}

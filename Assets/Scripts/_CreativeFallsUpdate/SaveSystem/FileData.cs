@@ -31,7 +31,16 @@ public struct Bk{
 	public float range;
 	public float spotAngle;
 
-	public Bk(Vector3 pos, Vector3 rot, Vector3 scl, int gri, int gli, string linkId, Color32 col, float intensity, float range, float spotAngle){
+	//trigger setup
+	public bool isT;
+	public Vector3 thisPosition;
+	public Vector3 newPosition;
+	public int speed;
+	public int[] ids;
+	public string id;
+
+
+	public Bk(Vector3 pos, Vector3 rot, Vector3 scl, int gri, int gli, string linkId, Color32 col, float intensity, float range, float spotAngle, Vector3 thisPosition, Vector3 newPosition, int speed, int[] ids, string id){
 		this.pos = pos;
 		this.rot = rot;
 		this.scl = scl;
@@ -57,6 +66,22 @@ public struct Bk{
 			this.intensity = 0;
 			this.range = 0;
 			this.spotAngle = 0;
+		}
+
+		if(this.groupId == 4){
+			this.isT = true;
+			this.thisPosition = thisPosition;
+			this.newPosition = newPosition;
+			this.speed = speed;
+			this.id = id;
+			this.ids = ids;
+		} else {
+			this.isT = false;
+			this.thisPosition = thisPosition;
+			this.newPosition = newPosition;
+			this.speed = speed;
+			this.id = id;
+			this.ids = ids;
 		}
 	}
 }
