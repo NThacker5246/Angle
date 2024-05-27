@@ -30,66 +30,146 @@ public class PortOpener : MonoBehaviour
     }
 
     public void ListenNow(){
-    	StartCoroutine("StartConnection");
-    }
+    	StartConnection();
+    } 
 
-    IEnumerator StartConnection()
+    void StartConnection()
     {
         try
         {
             IPAddress ipAddress = IPAddress.Parse(ip.text);
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, int.Parse(port.text));
 
-            Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            listener.Bind(localEndPoint);
-            listener.Listen(10);
-
-            Debug.Log("Server is listening on port " + port.text);
-
-            StartListening(listener);
-
 	        // Sender
 	        string messageToSend = "Hello, Russia!";
-	        //Address
+	        client(localEndPoint);
+	        server(localEndPoint);
 
-	        SendPacket(messageToSend, ipAddressToSend.text, 8080);
 
         }
         catch (Exception e)
         {
-            Debug.LogError(e.ToString());
+            result.text += e.ToString();
         }
-        yield return null;
     }
+    /*
+    async void SentAndList(IPEndPoint ipEndPoint){
+        Socket client = new Socket(ipEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+        client.Bind(ipEndPoint);
+        client.Listen(100);
 
-    public void CheckWarp(){
-    	StartCoroutine("Check");
-    }
+        await client.ConnectAsync(ipEndPoint);
+        while (true)
+        {
+            // Send message.
+            var message = "login";
+            var messageBytes = Encoding.UTF8.GetBytes(message);
+            _ = await client.SendAsync(messageBytes, SocketFlags.None);
+            result.text += $"Socket client sent message: \"{message}\"";
 
-    IEnumerator Check()
-    {
-        // Receiver
-        string receivedMessage = ReceivePacket(8080);
-        result.text = "Received message: " + receivedMessage;
-        yield return null;
-    }
+            // Receive ack.
+            var handler = await client.AcceptAsync();
+            var buffer = new byte[1_024];
+            var received = await handler.ReceiveAsync(buffer, SocketFlags.None);
+            var response = Encoding.UTF8.GetString(buffer, 0, received);
 
-    public void SendPacket(string message, string ipAddress, int port)
-    {
-        UdpClient client = new UdpClient();
-        IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(ipAddress), port);
-        byte[] data = Encoding.ASCII.GetBytes(message);
-        client.Send(data, data.Length, endPoint);
-        Console.WriteLine("Sent message: " + message);
-    }
+            result.text += $"Socket client received acknowledgment: \"{response}\"";
+            break;
 
-    public string ReceivePacket(int port)
-    {
-        UdpClient listener = new UdpClient(port);
-        IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, port);
-        byte[] receivedData = listener.Receive(ref endPoint);
-        string receivedMessage = Encoding.ASCII.GetString(receivedData);
-        listener.Close();
-        return receivedMessage;
+            // Sample output:
+            //Socket client sent message: "Hi friends 👋!<|EOM|>"
+            //Socket client received acknowledgment: "<|ACK|>"
+        }
+
+        client.Shutdown(SocketShutdown.Both);
     }
+    */
+    async void client(IPEndPoint ipEndPoint){
+	    Socket client = new Socket(ipEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
+		await client.ConnectAsync(ipEndPoint);
+		while (true)
+		{
+		    // Send message.
+		    var message = "key=value;";
+		    var messageBytes = Encoding.UTF8.GetBytes(message);
+		    _ = await client.SendAsync(messageBytes, SocketFlags.None);
+		    result.text += $"Socket client sent message: \"{message}\"";
+
+		    // Receive ack.
+		    var buffer = new byte[1_024];
+		    var received = await client.ReceiveAsync(buffer, SocketFlags.None);
+		    var response = Encoding.UTF8.GetString(buffer, 0, received);
+		    if (response == "<|ACK|>")
+		    {
+		        result.text += $"Socket client received acknowledgment: \"{response}\"";
+		        break;
+		    }
+
+
+		    var ack = ";";
+		    if (response.IndexOf(ack) > -1 /* is end of message */)
+		    {
+		        result.text += $"Socket client received message: \"{response.Replace(ack, "")}\"";
+		        break;
+		    }
+		    // Sample output:
+		    //     Socket client sent message: "Hi friends 👋!<|EOM|>"
+		    //     Socket client received acknowledgment: "<|ACK|>"
+		}
+
+		client.Shutdown(SocketShutdown.Both);
+	}
+
+	async void server(IPEndPoint ipEndPoint){
+		Socket listener = new Socket(ipEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
+		listener.Bind(ipEndPoint);
+		listener.Listen(100);
+
+		var handler = await listener.AcceptAsync();
+		while (true)
+		{
+		    // Receive message.
+		    var buffer = new byte[1_024];
+		    var received = await handler.ReceiveAsync(buffer, SocketFlags.None);
+		    var response = Encoding.UTF8.GetString(buffer, 0, received);
+		    
+		    var eom = ";";
+		    if (response.IndexOf(eom) > -1 /* is end of message */)
+		    {
+		        result.text += $"Socket server received message: \"{response.Replace(eom, "")}\"";
+
+		        var ackMessage = "dataCollected;";
+		        var echoBytes = Encoding.UTF8.GetBytes(ackMessage);
+		        await handler.SendAsync(echoBytes, 0);
+		        result.text += $"Socket server sent acknowledgment: \"{ackMessage}\"";
+
+		        break;
+		    }
+		    // Sample output:
+		    //    Socket server received message: "Hi friends 👋!"
+		    //    Socket server sent acknowledgment: "<|ACK|>"
+		}
+	}
+    /*
+
+        public void SendPacket(string message, string ipAddress, int port)
+        {
+            UdpClient client = new UdpClient();
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(ipAddress), port);
+            byte[] data = Encoding.ASCII.GetBytes(message);
+            client.Send(data, data.Length, endPoint);
+            Console.WriteLine("Sent message: " + message);
+        }
+
+        public string ReceivePacket(int port)
+        {
+            UdpClient listener = new UdpClient(port);
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, port);
+            byte[] receivedData = listener.Receive(ref endPoint);
+            string receivedMessage = Encoding.ASCII.GetString(receivedData);
+            listener.Close();
+            return receivedMessage;
+        }*/
 }
