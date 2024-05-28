@@ -6,6 +6,8 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Globalization;
+
 
 public class PortOpener : MonoBehaviour
 {
@@ -14,6 +16,20 @@ public class PortOpener : MonoBehaviour
     public Text result;
     public string temp;
     public InputField ipAddressToSend;
+
+    public string yourIP;
+    public GameObject yourPlayer;
+    public Players pl;
+    public CMPOS cm;
+
+    void Start(){
+        pl.StartWarp();
+        string hostName = Dns.GetHostName();  
+        yourIP = "127.0.0.1";
+        pl.ht.Insert(yourIP);
+        yourPlayer = pl.ht.Find(yourIP);
+        cm.player = yourPlayer.GetComponent<PlayerContr>();
+    }
     
 
     private void StartListening(Socket listener)
@@ -90,11 +106,18 @@ public class PortOpener : MonoBehaviour
 		await client.ConnectAsync(ipEndPoint);
 		while (true)
 		{
+            string key = ""; 
+            if(Input.GetKeyDown(KeyCode.E)){
+                key = "e";
+            } else {
+                key = "none";
+            }
 		    // Send message.
-		    var message = "key=value;";
+            Vector3 position = yourPlayer.transform.position;
+		    var message = $"ip={yourIP}&x={position.x}&y={position.y}&z={position.z}&key={key};";
 		    var messageBytes = Encoding.UTF8.GetBytes(message);
 		    _ = await client.SendAsync(messageBytes, SocketFlags.None);
-		    result.text += $"Socket client sent message: \"{message}\"";
+		    result.text += $"Socket client sent message: \"{message}\"\n";
 
 		    // Receive ack.
 		    var buffer = new byte[1_024];
@@ -110,8 +133,7 @@ public class PortOpener : MonoBehaviour
 		    var ack = ";";
 		    if (response.IndexOf(ack) > -1 /* is end of message */)
 		    {
-		        result.text += $"Socket client received message: \"{response.Replace(ack, "")}\"";
-		        break;
+		        result.text += $"Socket client received message: \"{response.Replace(ack, "")}\"\n";
 		    }
 		    // Sample output:
 		    //     Socket client sent message: "Hi friends 👋!<|EOM|>"
@@ -138,19 +160,61 @@ public class PortOpener : MonoBehaviour
 		    var eom = ";";
 		    if (response.IndexOf(eom) > -1 /* is end of message */)
 		    {
-		        result.text += $"Socket server received message: \"{response.Replace(eom, "")}\"";
+		        result.text += $"Socket server received message: \"{response.Replace(eom, "")}\"\n";
+                /*
+                foreach(string package in response.Split(";")){
+                    
 
-		        var ackMessage = "dataCollected;";
-		        var echoBytes = Encoding.UTF8.GetBytes(ackMessage);
-		        await handler.SendAsync(echoBytes, 0);
-		        result.text += $"Socket server sent acknowledgment: \"{ackMessage}\"";
+                }
+                */
+                string package = response.Replace(";", "");
+                string[] keyValues = package.Split("&");
+                string key = "";
+                Vector3 position = new Vector3(0, 0, 0);
+                string ip4 = "";
 
-		        break;
+                foreach(string keyValue in keyValues){
+                    string[] keyAndValue = keyValue.Split("=");
+                    string k = keyAndValue[0];
+                    string val1 = keyAndValue[1%keyAndValue.Length];
+                    if(k == "ip"){
+                        ip4 = val1;
+                        print("IP4 Key");
+                    } else if(k == "x"){
+                        position = new Vector3(float.Parse(val1.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat), position.y, position.z);
+                    } else if(k == "y"){
+                        position = new Vector3(position.x, float.Parse(val1.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat), position.z);
+                    } else if(k == "z"){
+                        position = new Vector3(position.x, position.y, float.Parse(val1.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat));
+                    } else if(k == "key"){
+                        key = val1;
+                    }
+                }
+                Debug.Log(position);
+                Debug.Log(key);
+                Debug.Log(ip4);
+
+                if(pl.ht.IsExists(ip4)){
+                    GameObject playerSet = pl.ht.Find(ip4);
+                    playerSet.transform.position = position;
+                } else {
+                    pl.ht.Insert(ip4);
+                    GameObject playerSet = pl.ht.Find(ip4);
+                    playerSet.transform.position = position;
+                }
+                var ackMessage = "dataCollected;";
+                var echoBytes = Encoding.UTF8.GetBytes(ackMessage);
+                await handler.SendAsync(echoBytes, 0);
+                result.text += $"Socket server sent acknowledgment: \"{ackMessage}\"\n";
+                
 		    }
+
 		    // Sample output:
 		    //    Socket server received message: "Hi friends 👋!"
 		    //    Socket server sent acknowledgment: "<|ACK|>"
 		}
+
+        pl.ht.Symetric();
 	}
     /*
 
