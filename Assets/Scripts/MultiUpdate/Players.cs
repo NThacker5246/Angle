@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 
 public class Players : MonoBehaviour
 {
@@ -21,7 +22,8 @@ public class HT
 	public void construct(GameObject player){
 		Player = player;
 	}
-
+	/*
+	ipv4
 	public int GetHash(string ip){
 		string[] nums = ip.Split(".");
 		string result = "";
@@ -30,6 +32,16 @@ public class HT
 		}
 		Debug.Log(result);
 		return int.Parse(result);
+	}
+	*/
+
+	public int GetHash(string ip){
+		byte[] k = Encoding.ASCII.GetBytes(ip);
+		int hash = 0;
+		for(int i = 0; i < k.Length; i++){
+			hash = (hash << 5) - hash + (int)k[i];
+		}
+		return Mathf.Abs(hash);
 	}
 
 	public int GetIndex(string ip){

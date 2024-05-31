@@ -11,7 +11,7 @@ public class Flyer : MonoBehaviour
 	public Transform tp2;
 
 	public float rSpeed;
-	private float k = 1;
+	//private float k = 1;
 	private bool b;
 	public GameObject msc;
 

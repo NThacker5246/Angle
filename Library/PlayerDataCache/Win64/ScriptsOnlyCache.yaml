@@ -10,6 +10,7 @@ ScriptsOnlyBuild:
     - CMPOS
     - CPicker
     - ClicableButton
+    - Client
     - Controller
     - DialogueManager
     - DialogueTrigger
@@ -42,6 +43,7 @@ ScriptsOnlyBuild:
     - PosController
     - RotFG
     - SaveToFile
+    - Server
     - Slime
     - Stats
     - TNT
@@ -51,13 +53,17 @@ ScriptsOnlyBuild:
     - TriggerSetup
     - Unlocker
     - Vol
+    Unity.PlasticSCM.Editor.dll:
+    - Unity.PlasticSCM.Editor.PlasticWindow
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -366,6 +372,9 @@ ScriptsOnlyBuild:
   - assembly: Assembly-CSharp
     fullTypeName: PortOpener
     methodName: ListenNow
+  - assembly: Assembly-CSharp
+    fullTypeName: PortOpener
+    methodName: YourRoom
   sceneClasses:
     Assets/Scenes/Editor.unity:
     - Class: 1
@@ -622,6 +631,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 6008}
     - Class: 114
       Script: {instanceID: 6548}
+    - Class: 114
+      Script: {instanceID: 26074}
+    - Class: 114
+      Script: {instanceID: 26080}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1944,7 +1957,7 @@ ScriptsOnlyBuild:
     className: Text
   - hash:
       serializedVersion: 2
-      Hash: 223047d88907374ed359c2b7855135f7
+      Hash: cf6e157d7b96b81af9d7870a00788428
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PortOpener
@@ -2320,6 +2333,18 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: b3f008912ced075db2e00a666f3f5776
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Client
+  - hash:
+      serializedVersion: 2
+      Hash: 7e6d8a77d77103647b6c887168a718db
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Server
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity

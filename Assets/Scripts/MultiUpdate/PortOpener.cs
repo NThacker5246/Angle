@@ -11,21 +11,27 @@ using System.Globalization;
 
 public class PortOpener : MonoBehaviour
 {
-	public InputField port;
-	public InputField ip;
+	public InputField yourRoom;
+	public InputField roomPl;
     public Text result;
-    public string temp;
-    public InputField ipAddressToSend;
 
     public string yourIP;
     public GameObject yourPlayer;
     public Players pl;
     public CMPOS cm;
 
+    public Server server;
+    public Client client;
+
     void Start(){
         pl.StartWarp();
-        string hostName = Dns.GetHostName();  
-        yourIP = "127.0.0.1";
+
+        string hostName = Dns.GetHostName();
+          
+        // Get the IP from GetHostByName method of dns class. 
+        yourIP = Dns.GetHostByName(hostName).AddressList[0].ToString();   
+
+        //yourIP = "127.0.0.1";
         pl.ht.Insert(yourIP);
         yourPlayer = pl.ht.Find(yourIP);
         cm.player = yourPlayer.GetComponent<PlayerContr>();
@@ -53,13 +59,17 @@ public class PortOpener : MonoBehaviour
     {
         try
         {
-            IPAddress ipAddress = IPAddress.Parse(ip.text);
-            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, int.Parse(port.text));
+            string ipC = GetIp(roomPl.text);
+            int port = GetPort(roomPl.text);
+            IPAddress ipAddress = IPAddress.Parse(ipC);
+            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, port);
 
 	        // Sender
-	        string messageToSend = "Hello, Russia!";
-	        client(localEndPoint);
-	        server(localEndPoint);
+	        //string messageToSend = "Hello, Russia!";
+            client.yourIP = yourIP;
+            client.yourPlayer = yourPlayer;
+	        client.client(localEndPoint);
+	        server.server(localEndPoint);
 
 
         }
@@ -68,172 +78,83 @@ public class PortOpener : MonoBehaviour
             result.text += e.ToString();
         }
     }
-    /*
-    async void SentAndList(IPEndPoint ipEndPoint){
-        Socket client = new Socket(ipEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-        client.Bind(ipEndPoint);
-        client.Listen(100);
 
-        await client.ConnectAsync(ipEndPoint);
-        while (true)
-        {
-            // Send message.
-            var message = "login";
-            var messageBytes = Encoding.UTF8.GetBytes(message);
-            _ = await client.SendAsync(messageBytes, SocketFlags.None);
-            result.text += $"Socket client sent message: \"{message}\"";
+    public string GenerateRoom(string ip, int port){
+        //http://[fe80::5a7f:a086:5432:13cf]:8888 - example
+        string first = "9876543210qwertyuiopasdfghjklzxcvbnm:[]"; // first alphabet
+        string secon = "0123456789mnbvcxzlkjhgfdsapoiuytrewqбвг"; //second
 
-            // Receive ack.
-            var handler = await client.AcceptAsync();
-            var buffer = new byte[1_024];
-            var received = await handler.ReceiveAsync(buffer, SocketFlags.None);
-            var response = Encoding.UTF8.GetString(buffer, 0, received);
+        string cp = "[" + ip + "]" + port;
+        char[] toEnc = cp.ToCharArray();
+        char[] ft = first.ToCharArray();
+        char[] st = secon.ToCharArray();
 
-            result.text += $"Socket client received acknowledgment: \"{response}\"";
-            break;
-
-            // Sample output:
-            //Socket client sent message: "Hi friends 👋!<|EOM|>"
-            //Socket client received acknowledgment: "<|ACK|>"
-        }
-
-        client.Shutdown(SocketShutdown.Both);
-    }
-    */
-    async void client(IPEndPoint ipEndPoint){
-	    Socket client = new Socket(ipEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-		await client.ConnectAsync(ipEndPoint);
-		while (true)
-		{
-            string key = ""; 
-            if(Input.GetKeyDown(KeyCode.E)){
-                key = "e";
-            } else {
-                key = "none";
-            }
-		    // Send message.
-            Vector3 position = yourPlayer.transform.position;
-		    var message = $"ip={yourIP}&x={position.x}&y={position.y}&z={position.z}&key={key};";
-		    var messageBytes = Encoding.UTF8.GetBytes(message);
-		    _ = await client.SendAsync(messageBytes, SocketFlags.None);
-		    result.text += $"Socket client sent message: \"{message}\"\n";
-
-		    // Receive ack.
-		    var buffer = new byte[1_024];
-		    var received = await client.ReceiveAsync(buffer, SocketFlags.None);
-		    var response = Encoding.UTF8.GetString(buffer, 0, received);
-		    if (response == "<|ACK|>")
-		    {
-		        result.text += $"Socket client received acknowledgment: \"{response}\"";
-		        break;
-		    }
-
-
-		    var ack = ";";
-		    if (response.IndexOf(ack) > -1 /* is end of message */)
-		    {
-		        result.text += $"Socket client received message: \"{response.Replace(ack, "")}\"\n";
-		    }
-		    // Sample output:
-		    //     Socket client sent message: "Hi friends 👋!<|EOM|>"
-		    //     Socket client received acknowledgment: "<|ACK|>"
-		}
-
-		client.Shutdown(SocketShutdown.Both);
-	}
-
-	async void server(IPEndPoint ipEndPoint){
-		Socket listener = new Socket(ipEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-		listener.Bind(ipEndPoint);
-		listener.Listen(100);
-
-		var handler = await listener.AcceptAsync();
-		while (true)
-		{
-		    // Receive message.
-		    var buffer = new byte[1_024];
-		    var received = await handler.ReceiveAsync(buffer, SocketFlags.None);
-		    var response = Encoding.UTF8.GetString(buffer, 0, received);
-		    
-		    var eom = ";";
-		    if (response.IndexOf(eom) > -1 /* is end of message */)
-		    {
-		        result.text += $"Socket server received message: \"{response.Replace(eom, "")}\"\n";
-                /*
-                foreach(string package in response.Split(";")){
-                    
-
-                }
-                */
-                string package = response.Replace(";", "");
-                string[] keyValues = package.Split("&");
-                string key = "";
-                Vector3 position = new Vector3(0, 0, 0);
-                string ip4 = "";
-
-                foreach(string keyValue in keyValues){
-                    string[] keyAndValue = keyValue.Split("=");
-                    string k = keyAndValue[0];
-                    string val1 = keyAndValue[1%keyAndValue.Length];
-                    if(k == "ip"){
-                        ip4 = val1;
-                        print("IP4 Key");
-                    } else if(k == "x"){
-                        position = new Vector3(float.Parse(val1.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat), position.y, position.z);
-                    } else if(k == "y"){
-                        position = new Vector3(position.x, float.Parse(val1.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat), position.z);
-                    } else if(k == "z"){
-                        position = new Vector3(position.x, position.y, float.Parse(val1.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat));
-                    } else if(k == "key"){
-                        key = val1;
-                    }
-                }
-                Debug.Log(position);
-                Debug.Log(key);
-                Debug.Log(ip4);
-
-                if(pl.ht.IsExists(ip4)){
-                    GameObject playerSet = pl.ht.Find(ip4);
-                    playerSet.transform.position = position;
-                } else {
-                    pl.ht.Insert(ip4);
-                    GameObject playerSet = pl.ht.Find(ip4);
-                    playerSet.transform.position = position;
-                }
-                var ackMessage = "dataCollected;";
-                var echoBytes = Encoding.UTF8.GetBytes(ackMessage);
-                await handler.SendAsync(echoBytes, 0);
-                result.text += $"Socket server sent acknowledgment: \"{ackMessage}\"\n";
+        string result = "";
+        foreach(char letter in toEnc){
+            for(int i = 0; i < ft.Length; i++){
                 
-		    }
+                if(letter == ft[i]){
+                    result += st[i];
+                }
+            }
+        }
+        Debug.Log(result);
+        return result;
+    }
 
-		    // Sample output:
-		    //    Socket server received message: "Hi friends 👋!"
-		    //    Socket server sent acknowledgment: "<|ACK|>"
-		}
+    public string GetIp(string room){
+        string first = "9876543210qwertyuiopasdfghjklzxcvbnm:[]"; // first alphabet
+        string secon = "0123456789mnbvcxzlkjhgfdsapoiuytrewqбвг"; //second
 
-        pl.ht.Symetric();
-	}
-    /*
+        char[] toDec = room.ToCharArray();
+        char[] ft = first.ToCharArray();
+        char[] st = secon.ToCharArray();
 
-        public void SendPacket(string message, string ipAddress, int port)
-        {
-            UdpClient client = new UdpClient();
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(ipAddress), port);
-            byte[] data = Encoding.ASCII.GetBytes(message);
-            client.Send(data, data.Length, endPoint);
-            Console.WriteLine("Sent message: " + message);
+        string ipPort = "";
+
+        foreach(char letter in toDec){
+            for(int i = 0; i < st.Length; i++){
+                
+                if(letter == st[i]){
+                    ipPort += ft[i];
+                }
+                
+            }
         }
 
-        public string ReceivePacket(int port)
-        {
-            UdpClient listener = new UdpClient(port);
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, port);
-            byte[] receivedData = listener.Receive(ref endPoint);
-            string receivedMessage = Encoding.ASCII.GetString(receivedData);
-            listener.Close();
-            return receivedMessage;
-        }*/
+        ipPort = ipPort.Replace("[", "");
+        string[] ipp = ipPort.Split("]");
+        string ip = ipp[0];
+        return ip;
+    }
+
+    public int GetPort(string room){
+        string first = "9876543210qwertyuiopasdfghjklzxcvbnm:[]"; // first alphabet
+        string secon = "0123456789mnbvcxzlkjhgfdsapoiuytrewqбвг"; //second
+
+        char[] toDec = room.ToCharArray();
+        char[] ft = first.ToCharArray();
+        char[] st = secon.ToCharArray();
+
+        string ipPort = "";
+
+        foreach(char letter in toDec){
+            for(int i = 0; i < st.Length; i++){
+                
+                if(letter == st[i]){
+                    ipPort += ft[i];
+                }
+            
+            }
+        }
+
+        ipPort = ipPort.Replace("[", "");
+        string[] ipp = ipPort.Split("]");
+        string port = ipp[1];
+        return int.Parse(port);
+    }
+
+    public void YourRoom(){
+        yourRoom.text = GenerateRoom(yourIP, 8080);
+    }
 }
