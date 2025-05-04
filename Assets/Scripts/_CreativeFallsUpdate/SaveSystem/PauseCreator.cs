@@ -1,3 +1,36 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e447ae6b8e8cb14a86715c914e717c2f234040ee1592039541d23abce79d3110
-size 638
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PauseCreator : MonoBehaviour
+{
+	public bool isOpenMenu;
+	public GameObject Canva;
+	public Fade d;
+	void PauseResume(){
+		Canva.SetActive(!isOpenMenu);
+		if(!isOpenMenu){
+			Time.timeScale = 0;
+		} else {
+			Time.timeScale = 1;
+		}
+		isOpenMenu = !isOpenMenu;
+	}
+
+	void Update(){
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			PauseResume();
+		}
+	}
+
+	public void Resume(){
+		Time.timeScale = 1;
+		Canva.SetActive(false);
+		isOpenMenu = false;
+	}
+
+	public void EXIT(){
+		Time.timeScale = 1;
+		d.FadeToLevel();
+	}
+}

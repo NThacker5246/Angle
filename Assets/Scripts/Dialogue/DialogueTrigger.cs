@@ -1,3 +1,24 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b93041e9e65e090b06e5f241790d71a35676599a09d30e62934592caa2f4cb4a
-size 431
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DialogueTrigger : MonoBehaviour
+{
+	public Dialogue[] dialogue;
+	public DialogueManager dm;
+
+	public int Count;
+
+	public void TriggerDialogue()
+	{
+		dm.StartDialogue(dialogue[Count]);
+		dm.isSt = true;
+		Count++;
+	}
+
+	void OnTriggerEnter(Collider other){
+		if(other.tag == "Player"){
+			TriggerDialogue();
+		}
+	}
+}

@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:516cccd3982237b2670f9444209ecc5f16c950473d4d1bcd8603f1493c8fd8e4
-size 422
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DialogueAnimator : MonoBehaviour
+{
+	public Animator startAnim;
+	public DialogueManager dm;
+
+	public void OnTriggerEnter(Collider other)
+	{
+		//
+		//startAnim.SetBool("startOpen", true);
+
+	}
+
+	public void OnTriggerExit(Collider other)
+	{
+		//startAnim.SetBool("startOpen", false);
+		//dm.EndDialogue();
+	}
+}

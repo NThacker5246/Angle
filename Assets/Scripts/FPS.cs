@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:28f99c26753c15aae38d43888e789989967bdc1aa3b2d1cdf7b7f7880160ffe2
-size 423
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class FPS : MonoBehaviour
+{
+	public Text text;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float fps = 1.0f / Time.deltaTime;
+        text.text = "FPS: " + (int)fps;
+    }
+}

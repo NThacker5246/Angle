@@ -1,3 +1,24 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8599701577466543974c72fbbe3f462b3ba7e337f38fd55e6e72eb37a73cd5b5
-size 512
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerButton : MonoBehaviour
+{
+	public ActedObject ActionObject;
+	public Animator anim;
+
+	private void OnTriggerEnter(Collider other){
+		if(other.tag == "Player"){
+			ActionObject.Do();
+			anim.SetBool("Click", true);
+		}
+		Debug.Log(other.tag);
+	}
+
+	private void OnTriggerExit(Collider other){
+		if(other.tag == "Player"){
+			ActionObject.StopDoing();
+			anim.SetBool("Click", false);
+		}
+	}
+}

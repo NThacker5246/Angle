@@ -1,3 +1,79 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:545eca2ea1b806ad8d96bbede211c8303b38f65227e0b8c2e45fc9167fd1ddc3
-size 1588
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class DialogueManager : MonoBehaviour
+{
+	public MrBeast me;
+	public Text dialogueText;
+	public Text nameText;
+
+	public Animator boxAnim;
+	//public Animator startAnim;
+	public bool end;
+	private Queue<string> sentences;
+	public bool isSt;
+
+	private void Start()
+	{
+		sentences = new Queue<string>();
+	}
+
+	public void StartDialogue(Dialogue dialogue)
+	{
+		boxAnim.SetBool("boxOpen", true);
+		//startAnim.SetBool("startOpen", false);
+
+		nameText.text = dialogue.name;
+		sentences.Clear();
+
+		foreach(string sentence in dialogue.sentences)
+		{
+			sentences.Enqueue(sentence);
+		}
+		DisplayNextSentence();
+	}
+
+	void Update(){
+		if(isSt && Input.GetKeyDown(KeyCode.C)){
+			DisplayNextSentence();
+		}
+	}
+
+	public void DisplayNextSentence()
+	{
+		if(sentences.Count == 0)
+		{
+			EndDialogue();
+			return;
+		}
+		string sentence = sentences.Dequeue();
+		StopAllCoroutines();
+		StartCoroutine(TypeSentence(sentence));
+	}
+
+	IEnumerator TypeSentence(string sentence)
+	{
+		dialogueText.text = "";
+		foreach(char letter in sentence.ToCharArray())
+		{
+			dialogueText.text += letter;
+			yield return null;
+		}
+	}
+
+	public void EndDialogue()
+	{
+		boxAnim.SetBool("boxOpen", false);
+		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerContr>().UpdateCursor();
+		StartCoroutine("Game");
+		end = true;
+		isSt = false;
+	}
+
+	IEnumerator Game(){
+		yield return new WaitForSeconds(1f);
+		me.isAttack = true;
+	}
+}

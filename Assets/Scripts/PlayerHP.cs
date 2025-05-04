@@ -1,3 +1,37 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:15a6fca505fbf94bbe3be46c7b094d9f99f3993d6408ffe069278e68bbf0211b
-size 647
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PlayerHP : MonoBehaviour
+{
+	public float HP;
+	public float Stamina;
+	public GameManager gm;
+	public Slider Bar;
+	public Pause stopper;
+
+	public void Damage(float hp){
+		HP -= hp;
+	}
+
+	public void Heal(float hp){
+		HP += hp;
+	}
+
+	private void Update(){
+		if(HP < 20){
+			Heal(Stamina*Time.deltaTime);
+		}
+		if(HP <= 0f){
+			gm.RestartGame();
+		}
+		if(Bar != null && (int) Bar.value != (int) HP){
+			Bar.value = (int) HP;
+		}
+		
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			stopper.Stop();
+		}
+	}
+}

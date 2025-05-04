@@ -1,3 +1,24 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:327773a8e7eb5e23cba0403168e48092683264eb326e5b07b59462075bb5c26d
-size 432
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Feett : MonoBehaviour
+{
+	public PlayerContr player;
+
+	void OnTriggerEnter(Collider other){
+		if(other.tag != "Player"){
+			player.isGrounded = true;
+		}
+	}
+
+	void OnTriggerExit(Collider other){
+		if(other.tag != "Player"){
+			player.isGrounded = false;
+		}
+	}
+
+	void LateUpdate(){
+		player.isGrounded = false;
+	}
+}

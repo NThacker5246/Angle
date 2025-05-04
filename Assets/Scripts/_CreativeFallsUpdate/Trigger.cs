@@ -1,3 +1,65 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5088ef3c3e3cb4fb2ac4646801d6c5f768401c1f4d7fdb05c1aae626b5ff6e87
-size 1538
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Trigger : MonoBehaviour
+{
+	public string Type;
+	public GameObject gm;
+
+	public Vector3 thisPosition;
+	public Vector3 newPosition;
+	public int speed;
+
+	public bool isDo;
+
+	public GameObject[] triggers;
+
+	public void OnTriggerEnter(Collider other){
+		isDo = true;
+	}
+	public void OnTriggerExit(Collider other){
+		isDo = false;
+	}
+
+	void Update(){
+		if(gm == null && Type != "spawn") return;
+		if(Type == "spawn" && triggers[0] == null) return;
+		if(isDo) {
+			switch (Type)
+			{
+			    case "move":
+			    	Transform obj = gm.GetComponent<Transform>();
+			    	obj.position =  Vector3.MoveTowards(obj.position, newPosition, speed*Time.deltaTime);
+			        break;
+			    case "toggle":
+			    	gm.SetActive(false);
+			    	break;
+			    case "spawn":
+			    	foreach(GameObject g in triggers){
+			    		Trigger t = g.GetComponent<Trigger>();
+			    		print(t.name);
+			    		t.isDo = true;
+			    	}
+			    	break;
+			}
+		} else {
+			switch (Type)
+			{
+			    case "move":
+			    	Transform obj = gm.GetComponent<Transform>();
+			    	obj.position =  Vector3.MoveTowards(obj.position, thisPosition, speed*Time.deltaTime);
+			        break;
+			    case "toggle":
+			    	gm.SetActive(true);
+			    	break;
+			    case "spawn":
+			    	foreach(GameObject g in triggers){
+			    		Trigger t = g.GetComponent<Trigger>();
+			    		t.isDo = false;
+			    	}
+			    	break;
+			}
+		}
+	}
+}

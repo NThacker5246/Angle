@@ -1,3 +1,30 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:037ffc6af9af56ace61b661f301505f5bd6b17666be207cf10009b8c21347ed7
-size 637
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Stats : MonoBehaviour
+{
+	public Transform cam;
+	public GameObject block;
+
+	public Text FPS;
+	public Text position1;
+
+	public bool isShown;
+
+	void Update(){
+		if(isShown){
+			string pos = "Pos: " + (int)cam.position.x + "/" + (int)cam.position.y + "/" + (int)cam.position.z;
+			if(position1.text != pos){
+				position1.text = pos;
+			}
+			FPS.text = "FPS: " + Mathf.Floor(1/Time.deltaTime);
+		}
+
+		if(Input.GetKeyDown(KeyCode.F3)){
+			isShown = !isShown;
+			block.SetActive(isShown);
+		}
+	}
+}

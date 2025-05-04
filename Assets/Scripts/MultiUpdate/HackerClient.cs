@@ -1,3 +1,28 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6d5ab20999a3538e7978e5801a82b95d37ab75dd8593e245be8ddb24e05de601
-size 868
+using System;
+using System.Net.Sockets;
+using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class HackerClient: MonoBehaviour
+{
+	[SerializeField] private InputField ip;
+	[SerializeField] private InputField text;
+    public void SendMessage()
+    {
+        string serverIp = ip.text; // Замените на IP адрес сервера
+        const int port = 8080;
+
+        using (TcpClient client = new TcpClient(serverIp, port))
+        {
+            NetworkStream stream = client.GetStream();
+            string message = text.text;
+            byte[] data = Encoding.ASCII.GetBytes(message);
+            
+            stream.Write(data, 0, data.Length);
+            Console.WriteLine("Сообщение отправлено: " + message);
+        }
+    }
+}

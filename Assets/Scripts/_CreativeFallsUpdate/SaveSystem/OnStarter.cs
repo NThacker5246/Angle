@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:59f813af9f7adaf834950ff2eb0a853d3c0826a9ff40af097f56b7e40ef3ba55
-size 430
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class OnStarter : MonoBehaviour
+{
+	public InputField num;
+	public BlockEditor editor;
+	public Animator anim;
+
+	public void SetUp(){
+		int n = int.Parse(num.text);
+		//editor.allBlocks = new GameObject[n];
+		anim.SetBool("Closed", true);
+	}
+
+	public void Close(){
+		anim.SetBool("Closed", true);
+	}
+}

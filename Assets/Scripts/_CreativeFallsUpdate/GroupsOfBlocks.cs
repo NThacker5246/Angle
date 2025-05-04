@@ -1,3 +1,13 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:10b859a52cd59d6940190ae229ed9c6c56656b98588bac32e1839d60d26e14ca
-size 241
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+[System.Serializable]
+
+public class GroupsOfBlocks
+{
+	public string Name;
+	public GameObject[] blocks;
+	public Sprite[] sp;
+}

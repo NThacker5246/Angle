@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1c4b42d79284b5966d5dec60d6c6cad27de21fd62dd791b656e66d5b00ee387a
-size 456
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Pickup : MonoBehaviour
+{
+	public GameObject Box;
+	public float px;
+	public float pz;
+	public PlayerContr pl;
+	
+	public void Drop(){
+		Instantiate(Box, transform.position + new Vector3(px, 0f, pz), Quaternion.identity);
+		Destroy(gameObject);
+		pl.Get = false;
+	}
+
+	public void Update(){
+		if(Input.GetKeyDown(KeyCode.Q)){
+			Drop();
+		}
+	}
+}

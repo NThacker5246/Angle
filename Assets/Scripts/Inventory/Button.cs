@@ -1,3 +1,29 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2f1d4bbc3026f3777c57d348b7292952f363a8230b67a4a912c1257ae36d6269
-size 607
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Button : MonoBehaviour
+{
+	public ActedObject ActionObject;
+	public Animator anim;
+
+	private void OnTriggerEnter(Collider other){
+		if(other.tag == "Box"){
+			ActionObject.Do();
+			anim.SetBool("Click", true);
+		}
+		
+		if(other.tag == "PickedBox") {
+			ActionObject.StopDoing();
+			anim.SetBool("Click", false);
+		}
+		Debug.Log(other.tag);
+	}
+
+	private void OnTriggerExit(Collider other){
+		if(other.tag == "Box"){
+			ActionObject.StopDoing();
+			anim.SetBool("Click", false);
+		}
+	}
+}

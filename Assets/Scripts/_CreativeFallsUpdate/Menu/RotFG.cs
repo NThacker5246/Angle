@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:36ce8763bda6e6e6538fec8865b77250ba0df1635d599ead9cb53fca13ed5d86
-size 410
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RotFG : MonoBehaviour
+{
+	public Transform tr;
+	public float rotationZ;
+
+	void Update(){
+		if(Input.GetKey(KeyCode.F)){
+			rotationZ += 1;
+		} else if(Input.GetKey(KeyCode.G)){
+			rotationZ -= 1;
+		}
+		if(tr.eulerAngles.z != rotationZ){
+			tr.eulerAngles = new Vector3(0f, 0f, rotationZ);
+		}
+	}
+}

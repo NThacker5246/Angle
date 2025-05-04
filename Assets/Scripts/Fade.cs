@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c75fe50edf883632f642aeb2b6340e908d45adf75111d5afd78a7258637ce8da
-size 429
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class Fade : MonoBehaviour
+{
+	[SerializeField] private Animator anim;
+	public int levelToLoad;
+	public Vector3 newPl;
+
+	//public Vector3 position;
+	
+	public void FadeToLevel()
+	{
+		anim.SetTrigger("Fade");
+	}
+
+	public void OnFadeComplete(){
+		SceneManager.LoadScene(levelToLoad);
+	}
+}

@@ -1,3 +1,42 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2f0a7d96698b8eaf42f9c6f77fb3cf7b14cf08ed28e137ef54226ab19cad8887
-size 906
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Help : MonoBehaviour
+{
+	public int state;
+	public string[] helpText;
+	public Text txt;
+	public Animator cloud;
+	private Animator an;
+
+	void Start(){
+		an = GetComponent<Animator>();
+	}
+
+	public void HelpMan(){
+		if(state >= helpText.Length){
+			cloud.SetBool("cld", false);
+			state = 0;
+		} else {
+			cloud.SetBool("cld", true);
+			an.SetBool("help", true);
+			StopAllCoroutines();
+			//txtSetLetter(helpText[state]);
+			StartCoroutine(txtSetLetter(helpText[state]));
+			state += 1;
+		}
+	}
+
+	IEnumerator txtSetLetter(string sentence){
+		txt.text = "";
+		foreach(char letter in sentence.ToCharArray())
+		{
+			txt.text += letter;
+			yield return new WaitForSeconds(0.02f);
+		}
+		yield return new WaitForSeconds(2f);
+		an.SetBool("help", false);
+	}
+}
