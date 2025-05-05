@@ -60,11 +60,11 @@ public class PlayerContr : MonoBehaviour
 	private void FixedUpdate(){
 		if(Input.GetKey(KeyCode.F)){
 			rotationZ += 1f;
-			vc = new Vector3(vc.x, vc.y, rotationZ);
+			transform.rotation = Quaternion.Euler(0, rotationY, rotationZ);
 		}
 		if(Input.GetKey(KeyCode.G)){
 			rotationZ -= 1f;
-			vc = new Vector3(vc.x, vc.y, rotationZ);
+			transform.rotation = Quaternion.Euler(0, rotationY, rotationZ);
 		}
 		float Horizontal = Input.GetAxis("Horizontal")*speed;
 		float Vertical = Input.GetAxis("Vertical")*speed;
